@@ -19,7 +19,7 @@ public class Elevation_Entry : MonoBehaviour
             {
                 boundary.enabled = true;
             }
-
+            //vao se sort lai order
             collision.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 15;
             collision.gameObject.layer = LayerMask.NameToLayer("Player High");
         }
