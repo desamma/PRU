@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Enemy_Health : MonoBehaviour
 
     public delegate void MonsterDefeted(int exp);
     public static event MonsterDefeted OnMonsterDefeated;
+    public event Action OnEnemyDestroyed;
 
     public int currentHealth;
     public int maxHealth;
@@ -27,6 +29,7 @@ public class Enemy_Health : MonoBehaviour
         else if (currentHealth <= 0)
         {
             OnMonsterDefeated(expReward);
+            OnEnemyDestroyed?.Invoke(); // Notify the spawner
             Destroy(gameObject);
         }
     }
