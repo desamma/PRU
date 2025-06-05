@@ -199,7 +199,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3456281964575311268}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 761c7f9ee79a59b428be6049c3aaf821, type: 3}
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   attackPoint: {fileID: 1182936679203154695}
-  attackRange: 0.7
+  attackRange: 1.3
   knockbackForce: 10
   stunTime: 0.3
   playerLayer:
@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  attackRange: 0.7
+  attackRange: 1.3
   attackCooldown: 1.5
   playerDetectionRange: 4.74
   detectionPoint: {fileID: 8581374687382261817}
@@ -403,7 +403,7 @@ Transform:
   m_GameObject: {fileID: 6793712350697738157}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: 0, z: 0}
+  m_LocalPosition: {x: 0.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

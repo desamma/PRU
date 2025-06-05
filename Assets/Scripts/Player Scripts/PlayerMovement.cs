@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
     public int facingDirection = 1; // 1 for right, -1 for left
 
     public Rigidbody2D rb;
@@ -50,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Normalize the movement vector to ensure consistent speed in all directions
         Vector2 input = new Vector2(horizontal, vertical);
-        rb.velocity = input.sqrMagnitude > 0 ? moveSpeed * input.normalized : Vector2.zero;
+        rb.velocity = input.sqrMagnitude > 0 ? StatManager.instance.moveSpeed * input.normalized : Vector2.zero;
         //rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);
 
     }

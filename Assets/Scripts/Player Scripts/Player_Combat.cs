@@ -10,6 +10,7 @@ public class Player_Combat : MonoBehaviour
     public Animator animator;
 
     private float timer;
+    private float attackRange = 1;
 
     private void Update()
     {
@@ -49,7 +50,7 @@ public class Player_Combat : MonoBehaviour
         if (attackPoint != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPoint.position, StatManager.instance.weaponRange);
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         }
     }
 }

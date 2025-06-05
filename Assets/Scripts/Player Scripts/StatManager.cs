@@ -25,6 +25,7 @@ public class StatManager : MonoBehaviour
     public int currentExp;
     public int expToNextLevel;
     public int level;
+    public int upgradePoint;
 
     private void Awake()
     {
