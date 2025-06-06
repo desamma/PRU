@@ -350,6 +350,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  patrolDistance: 3
+  idleToPatrolWaitTime: 2
   noPlayerTimer: 0
 --- !u!114 &1468417119935988516
 MonoBehaviour:
