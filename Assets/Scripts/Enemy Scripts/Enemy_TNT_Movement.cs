@@ -1,15 +1,6 @@
 using UnityEngine;
 
-public enum EnemyState
-{
-    Idle,
-    Patrol,
-    Knockback,
-    Chase,
-    Attack
-}
-
-public class Enemy_Movement : MonoBehaviour
+public class Enemy_TNT_Movement : MonoBehaviour
 {
     public float speed = 1f;
     public float attackRange = 2f;
@@ -30,13 +21,16 @@ public class Enemy_Movement : MonoBehaviour
     private Vector3 originalPosition;
     private float attackCooldownTimer;
     private int facingDirection;
-    //private AudioSource audioClip;
     private EnemyState enemyState;
-    //public float noPlayerTimer = 0f; // Timer for no player detection
+    public float noPlayerTimer = 0f;
 
     private Rigidbody2D rb;
     private Transform player;
     private Animator animator;
+    private Enemy_Shooting shootingScript;
+
+    // Add this flag to prevent state conflicts
+    private bool isAttacking = false;
 
     private void Awake()
     {
@@ -52,42 +46,64 @@ public class Enemy_Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //audioClip = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        shootingScript = GetComponent<Enemy_Shooting>();
         ChangeState(EnemyState.Idle);
-        //originalPosition = transform.position; // Store the original position for potential patrol logic
-        facingDirection = transform.localScale.x > 0 ? 1 : -1; // Determine initial facing direction based on local scale
+        facingDirection = transform.localScale.x > 0 ? 1 : -1;
     }
 
     private void Update()
     {
         if (enemyState != EnemyState.Knockback)
         {
-            CheckForPlayer();
+            // Update cooldown timer
             if (attackCooldownTimer > 0)
             {
                 attackCooldownTimer -= Time.deltaTime;
             }
+
+            // Check for player first
+            CheckForPlayer();
+
+            // Handle different states
             if (enemyState == EnemyState.Chase)
             {
-                //Debug.Log("Chasing the player");
+                Debug.Log("Chasing the player");
                 Chase();
             }
             else if (enemyState == EnemyState.Attack)
             {
                 rb.velocity = Vector2.zero; // Stop the enemy when attacking
-                //Debug.Log("Attacking the player");
+
+                // Face the player when attacking
+                if (player != null)
+                {
+                    if ((player.position.x > transform.position.x && facingDirection == -1) ||
+                        (player.position.x < transform.position.x && facingDirection == 1))
+                    {
+                        Flip();
+                    }
+                }
+
+                // Only attack if cooldown is ready and we're not already in the middle of attacking
+                if (attackCooldownTimer <= 0 && !isAttacking)
+                {
+                    PerformAttack();
+                }
             }
             else if (enemyState == EnemyState.Patrol)
             {
                 Patrol();
+            }
+            else if (enemyState == EnemyState.Idle)
+            {
+                rb.velocity = Vector2.zero;
             }
         }
     }
 
     void Patrol()
     {
-        //if waiting, idle
         if (isWaiting)
         {
             ChangeState(EnemyState.Idle);
@@ -98,7 +114,6 @@ public class Enemy_Movement : MonoBehaviour
                 isWaiting = false;
                 waitTimer = 0f;
 
-                // Pick a new random patrol index (different from current)
                 int newIndex;
                 do
                 {
@@ -106,7 +121,7 @@ public class Enemy_Movement : MonoBehaviour
                 } while (newIndex == currentPatrolIndex);
 
                 currentPatrolIndex = newIndex;
-                ChangeState(EnemyState.Patrol); // Resume patrolling
+                ChangeState(EnemyState.Patrol);
             }
             return;
         }
@@ -121,7 +136,6 @@ public class Enemy_Movement : MonoBehaviour
             Flip();
         }
 
-        //imprecision in floating-point distance and movement
         if (Vector2.Distance(transform.position, targetPos) < 0.2f)
         {
             rb.velocity = Vector2.zero;
@@ -131,57 +145,104 @@ public class Enemy_Movement : MonoBehaviour
 
     void Chase()
     {
-        if (player.position.x > transform.position.x && facingDirection == -1 ||
-                player.position.x < transform.position.x && facingDirection == 1)
+        if (player == null) return;
+
+        if ((player.position.x > transform.position.x && facingDirection == -1) ||
+            (player.position.x < transform.position.x && facingDirection == 1))
         {
             Flip();
         }
-        // Allow to use speed to control the enemy's movement speed
+
         Vector2 direction = (player.position - transform.position).normalized;
         rb.velocity = direction * speed;
-        //rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);
     }
 
     private void Flip()
     {
-        facingDirection *= -1; // Change the direction
+        facingDirection *= -1;
         Vector3 localScale = transform.localScale;
-        localScale.x *= -1; // Flip the sprite by changing the x scale
+        localScale.x *= -1;
         transform.localScale = localScale;
     }
 
     private void CheckForPlayer()
     {
-        //Debug.Log("Checking for player within detection range");
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(detectionPoint.position, playerDetectionRange, playerLayer);
+
         if (hitColliders.Length > 0)
         {
             player = hitColliders[0].transform;
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-            if (Vector2.Distance(transform.position, player.position) <= attackRange)
+            // Priority: Attack > Chase
+            if (distanceToPlayer <= attackRange)
             {
                 Debug.Log("Player is within attack range");
-                rb.velocity = Vector2.zero; // Stop the enemy when attacking
-                if (attackCooldownTimer <= 0)
+                rb.velocity = Vector2.zero;
+
+                // Change to attack state if not already in it
+                if (enemyState != EnemyState.Attack)
                 {
                     ChangeState(EnemyState.Attack);
-                    attackCooldownTimer = attackCooldown;
                 }
             }
-            else if (Vector2.Distance(transform.position, player.position) > attackRange && enemyState != EnemyState.Attack)
+            else if (distanceToPlayer > attackRange)
             {
-                ChangeState(EnemyState.Chase);
+                // Player is in detection range but outside attack range - chase them
+                Debug.Log("Player detected but outside attack range - chasing");
+                isAttacking = false; // Reset attacking flag when player moves out of range
+                if (enemyState != EnemyState.Chase)
+                {
+                    ChangeState(EnemyState.Chase);
+                }
             }
         }
         else
         {
-            //noPlayerTimer += Time.deltaTime; // Increment the timer when no player is detected
-            rb.velocity = Vector2.zero; // Stop the enemy when not chasing
-            ChangeState(EnemyState.Patrol);
+            // No player detected - return to patrol
+            Debug.Log("No player detected - returning to patrol");
+            player = null;
+            isAttacking = false; // Reset attacking flag when no player detected
+            if (enemyState != EnemyState.Patrol && enemyState != EnemyState.Idle)
+            {
+                rb.velocity = Vector2.zero;
+                ChangeState(EnemyState.Patrol);
+            }
         }
     }
+
+    private void PerformAttack()
+    {
+        // Double-check that we can attack
+        if (isAttacking || attackCooldownTimer > 0)
+        {
+            return;
+        }
+
+        isAttacking = true;
+        attackCooldownTimer = attackCooldown;
+
+        // Don't call shoot here - let the animation event handle it
+        // The animation event will call Enemy_Shooting.Shoot() at the right moment
+
+        Attack(); // Your existing attack method (probably just debug log)
+
+        Debug.Log($"Enemy attacks! Animation started, cooldown set to {attackCooldown} seconds");
+
+        // Reset attacking flag after a short delay to allow attack animation/action to complete
+        StartCoroutine(ResetAttackingFlag());
+    }
+
+    private System.Collections.IEnumerator ResetAttackingFlag()
+    {
+        // Wait a short time for the attack to "complete"
+        yield return new WaitForSeconds(0.1f);
+        isAttacking = false;
+    }
+
     public void ChangeState(EnemyState newState)
     {
+        // Exit current state
         switch (enemyState)
         {
             case EnemyState.Idle:
@@ -200,6 +261,7 @@ public class Enemy_Movement : MonoBehaviour
 
         enemyState = newState;
 
+        // Enter new state
         switch (enemyState)
         {
             case EnemyState.Idle:
@@ -215,23 +277,26 @@ public class Enemy_Movement : MonoBehaviour
                 animator.SetBool("isPatrolling", true);
                 break;
         }
+
+        Debug.Log($"Enemy state changed to: {enemyState}");
+    }
+
+    public void Attack()
+    {
+        Debug.Log("Enemy attacks the player!");
     }
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(detectionPoint.position, playerDetectionRange);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        if (detectionPoint != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(detectionPoint.position, playerDetectionRange);
+        }
+        if (attackPoint != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        }
     }
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Player")
-    //    {
-    //        audioClip.Play();
-    //        /*rb.velocity = Vector2.zero; // Stop the enemy when not chasing
-    //        ChangeState(EnemyState.Idle);*/
-    //    }
-    //}   
-
 }
