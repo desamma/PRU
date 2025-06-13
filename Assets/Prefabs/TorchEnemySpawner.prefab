@@ -50,6 +50,7 @@ MonoBehaviour:
   maximumSpawnTime: 5
   maximumEnemy: 5
   spawnRadius: 3
+  spawnCollider: {fileID: 8649942367620506236}
 --- !u!58 &8649942367620506236
 CircleCollider2D:
   m_ObjectHideFlags: 0
