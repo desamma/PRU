@@ -14,5 +14,9 @@ public class Bullet : MonoBehaviour
             collision.GetComponent<PlayerMovement>().KnockBack(transform, knockbackForce, stunTime);
             Destroy(gameObject); // destroy the projectile after hitting the player
         }
+        if (collision.CompareTag("Terrain"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

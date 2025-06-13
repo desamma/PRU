@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy_TNT_Movement : MonoBehaviour
@@ -29,9 +30,6 @@ public class Enemy_TNT_Movement : MonoBehaviour
     private Animator animator;
     private Enemy_Shooting shootingScript;
 
-    // Add this flag to prevent state conflicts
-    private bool isAttacking = false;
-
     private void Awake()
     {
         originalPosition = transform.position;
@@ -56,6 +54,7 @@ public class Enemy_TNT_Movement : MonoBehaviour
     {
         if (enemyState != EnemyState.Knockback)
         {
+            //Debug.Log(attackCooldownTimer);
             // Update cooldown timer
             if (attackCooldownTimer > 0)
             {
@@ -83,12 +82,6 @@ public class Enemy_TNT_Movement : MonoBehaviour
                     {
                         Flip();
                     }
-                }
-
-                // Only attack if cooldown is ready and we're not already in the middle of attacking
-                if (attackCooldownTimer <= 0 && !isAttacking)
-                {
-                    PerformAttack();
                 }
             }
             else if (enemyState == EnemyState.Patrol)
@@ -177,20 +170,24 @@ public class Enemy_TNT_Movement : MonoBehaviour
             // Priority: Attack > Chase
             if (distanceToPlayer <= attackRange)
             {
-                Debug.Log("Player is within attack range");
+                //Debug.Log("Player is within attack range");
                 rb.velocity = Vector2.zero;
 
                 // Change to attack state if not already in it
-                if (enemyState != EnemyState.Attack)
+                if (enemyState != EnemyState.Attack && attackCooldownTimer <= 0)
                 {
                     ChangeState(EnemyState.Attack);
+                    PerformAttack();
+                }
+                else
+                {
+                    ChangeState(EnemyState.Idle);
                 }
             }
             else if (distanceToPlayer > attackRange)
             {
                 // Player is in detection range but outside attack range - chase them
-                Debug.Log("Player detected but outside attack range - chasing");
-                isAttacking = false; // Reset attacking flag when player moves out of range
+                //Debug.Log("Player detected but outside attack range - chasing");
                 if (enemyState != EnemyState.Chase)
                 {
                     ChangeState(EnemyState.Chase);
@@ -200,9 +197,8 @@ public class Enemy_TNT_Movement : MonoBehaviour
         else
         {
             // No player detected - return to patrol
-            Debug.Log("No player detected - returning to patrol");
+            //Debug.Log("No player detected - returning to patrol");
             player = null;
-            isAttacking = false; // Reset attacking flag when no player detected
             if (enemyState != EnemyState.Patrol && enemyState != EnemyState.Idle)
             {
                 rb.velocity = Vector2.zero;
@@ -213,31 +209,7 @@ public class Enemy_TNT_Movement : MonoBehaviour
 
     private void PerformAttack()
     {
-        // Double-check that we can attack
-        if (isAttacking || attackCooldownTimer > 0)
-        {
-            return;
-        }
-
-        isAttacking = true;
         attackCooldownTimer = attackCooldown;
-
-        // Don't call shoot here - let the animation event handle it
-        // The animation event will call Enemy_Shooting.Shoot() at the right moment
-
-        Attack(); // Your existing attack method (probably just debug log)
-
-        Debug.Log($"Enemy attacks! Animation started, cooldown set to {attackCooldown} seconds");
-
-        // Reset attacking flag after a short delay to allow attack animation/action to complete
-        StartCoroutine(ResetAttackingFlag());
-    }
-
-    private System.Collections.IEnumerator ResetAttackingFlag()
-    {
-        // Wait a short time for the attack to "complete"
-        yield return new WaitForSeconds(0.1f);
-        isAttacking = false;
     }
 
     public void ChangeState(EnemyState newState)

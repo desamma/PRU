@@ -350,9 +350,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  patrolDistance: 3
+  patrolDistance: 1
   idleToPatrolWaitTime: 2
-  noPlayerTimer: 0
 --- !u!114 &1468417119935988516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680f6765432cfc7428c213454ab7cd36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRanged: 0
 --- !u!1 &6793712350697738157
 GameObject:
   m_ObjectHideFlags: 0
