@@ -5,21 +5,23 @@ public class TorchEnemy_Spawner : MonoBehaviour
     [SerializeField] private GameObject enemy_prefabs;
     [SerializeField] private float minimumSpawnTime;
     [SerializeField] private float maximumSpawnTime;
-    [SerializeField] public int maximumEnemy;
-    [SerializeField] private float spawnRadius = 2f; // Smaller radius for spawning enemies
+    [SerializeField] private int maximumEnemy;
+    [SerializeField] private float spawnRadius = 2f;
 
     private float timeUntilSpawn;
     private int currentEnemyCount;
     private float detectionRadius;
     private bool playerInRange = false;
 
+    [SerializeField] private CircleCollider2D spawnCollider;
+
     private void Awake()
     {
+        spawnCollider = GetComponent<CircleCollider2D>();
         SetTimeUntilSpawn();
 
-        // Get the detection radius from the colliderlider
-        CircleCollider2D collider = GetComponent<CircleCollider2D>();
-        detectionRadius = collider.radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.y);
+        // Get the detection radius from the collider
+        detectionRadius = spawnCollider.radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.y);
 
         // Optional: Clamp spawn radius to always be smaller than detection
         spawnRadius = Mathf.Min(spawnRadius, detectionRadius);
@@ -51,9 +53,21 @@ public class TorchEnemy_Spawner : MonoBehaviour
 
             if (timeUntilSpawn <= 0)
             {
-                Vector2 offset = Random.insideUnitCircle * spawnRadius;
-                Vector3 spawnPosition = transform.position + new Vector3(offset.x, offset.y, 0f);
+                // Compute spawn center using collider offset and scale
+                Vector3 colliderOffset = new(
+                    spawnCollider.offset.x * transform.lossyScale.x,
+                    spawnCollider.offset.y * transform.lossyScale.y,
+                    0f
+                );
+                Vector3 spawnCenter = transform.position + colliderOffset;
 
+                // Generate random offset within spawn radius
+                Vector2 offset2D = Random.insideUnitCircle * spawnRadius;
+                Vector3 offset3D = new(offset2D.x, offset2D.y, 0f);
+
+                Vector3 spawnPosition = spawnCenter + offset3D;
+
+                // Instantiate enemy
                 GameObject newEnemy = Instantiate(enemy_prefabs, spawnPosition, Quaternion.identity);
                 currentEnemyCount++;
 
@@ -89,10 +103,14 @@ public class TorchEnemy_Spawner : MonoBehaviour
         if (!TryGetComponent<CircleCollider2D>(out var collider)) return;
 
         // Calculate world-space center using offset and transform
-        Vector3 offset = new(collider.offset.x * transform.lossyScale.x, collider.offset.y * transform.lossyScale.y, 0f);
+        Vector3 offset = new(
+            spawnCollider.offset.x * transform.lossyScale.x,
+            spawnCollider.offset.y * transform.lossyScale.y,
+            0f
+        );
         Vector3 worldCenter = transform.position + offset;
 
-        // Draw spawn area (red), assuming it's always centered at worldCenter
+        // Draw spawn area (red)
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(worldCenter, spawnRadius);
     }
