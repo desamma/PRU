@@ -18,5 +18,13 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject); // destroy the projectile after hitting terrain
         }
+        else if (collision.CompareTag("Barrel"))
+        {
+            Destroy(gameObject); // destroy the projectile after hitting barrel
+            if (collision.TryGetComponent<Barrel>(out var barrel))
+            {
+                barrel.Explode(); // Trigger the barrel's explosion
+            }
+        }
     }
 }
