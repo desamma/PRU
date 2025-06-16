@@ -179,10 +179,10 @@ public class Enemy_TNT_Movement : MonoBehaviour
                     ChangeState(EnemyState.Attack);
                     PerformAttack();
                 }
-                else
-                {
-                    ChangeState(EnemyState.Idle);
-                }
+                //else
+                //{
+                //    ChangeState(EnemyState.Idle);
+                //}
             }
             else if (distanceToPlayer > attackRange)
             {

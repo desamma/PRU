@@ -53,8 +53,8 @@ public class ExpManager : MonoBehaviour
         currentLevelText.text = "Level: " + StatManager.instance.level.ToString();
     }
 
-    //private void OnDisable()
-    //{
-    //    Enemy_Health.OnMonsterDefeated -= GainExp;
-    //}
+    private void OnDisable()
+    {
+        Enemy_Health.OnMonsterDefeated -= GainExp;
+    }
 }
