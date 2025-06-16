@@ -32,7 +32,7 @@ public class Enemy_Movement : MonoBehaviour
     private int facingDirection;
     //private AudioSource audioClip;
     private EnemyState enemyState;
-    public float noPlayerTimer = 0f; // Timer for no player detection
+    //public float noPlayerTimer = 0f; // Timer for no player detection
 
     private Rigidbody2D rb;
     private Transform player;
@@ -70,7 +70,7 @@ public class Enemy_Movement : MonoBehaviour
             }
             if (enemyState == EnemyState.Chase)
             {
-                Debug.Log("Chasing the player");
+                //Debug.Log("Chasing the player");
                 Chase();
             }
             else if (enemyState == EnemyState.Attack)
@@ -173,21 +173,6 @@ public class Enemy_Movement : MonoBehaviour
                 ChangeState(EnemyState.Chase);
             }
         }
-        /*else if (Vector2.Distance(originalPosition, transform.position) > 0.1f && hitColliders.Length <= 0 && noPlayerTimer > 2f)
-        {
-            // If no player is detected, return to the original position (patrol logic can be added here)
-            Vector2 direction = (originalPosition - transform.position).normalized;
-            if (originalPosition.x > transform.position.x && facingDirection == -1 ||
-            originalPosition.x < transform.position.x && facingDirection == 1)
-            {
-                Flip();
-            }
-            else
-            {
-                rb.velocity = direction * speed;
-                ChangeState(EnemyState.Patrol);
-            }
-        }*/
         else
         {
             //noPlayerTimer += Time.deltaTime; // Increment the timer when no player is detected
@@ -195,17 +180,6 @@ public class Enemy_Movement : MonoBehaviour
             ChangeState(EnemyState.Patrol);
         }
     }
-
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Player")
-    //    {
-    //        audioClip.Play();
-    //        /*rb.velocity = Vector2.zero; // Stop the enemy when not chasing
-    //        ChangeState(EnemyState.Idle);*/
-    //    }
-    //}   
-
     public void ChangeState(EnemyState newState)
     {
         switch (enemyState)
@@ -250,4 +224,14 @@ public class Enemy_Movement : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        audioClip.Play();
+    //        /*rb.velocity = Vector2.zero; // Stop the enemy when not chasing
+    //        ChangeState(EnemyState.Idle);*/
+    //    }
+    //}   
+
 }
