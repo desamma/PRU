@@ -1,11 +1,9 @@
-using System.Collections;
 using UnityEngine;
 
 public class Enemy_TNT_Movement : MonoBehaviour
 {
     public float speed = 1f;
     public float attackRange = 2f;
-    public float attackCooldown = 2f;
     public float playerDetectionRange = 5f;
     public Transform detectionPoint;
     public Transform attackPoint;
@@ -20,7 +18,10 @@ public class Enemy_TNT_Movement : MonoBehaviour
     private float waitTimer = 0f;
 
     private Vector3 originalPosition;
-    private float attackCooldownTimer;
+
+    public float attackCooldown = 2f; // Cooldown time for attack
+    private float attackCooldownTimer = 2f; // timer for the attack
+
     private int facingDirection;
     private EnemyState enemyState;
     public float noPlayerTimer = 0f;
@@ -28,7 +29,7 @@ public class Enemy_TNT_Movement : MonoBehaviour
     private Rigidbody2D rb;
     private Transform player;
     private Animator animator;
-    private Enemy_Shooting shootingScript;
+    [SerializeField] private Enemy_Shooting shootingScript;
 
     private void Awake()
     {
@@ -43,6 +44,7 @@ public class Enemy_TNT_Movement : MonoBehaviour
 
     void Start()
     {
+        attackCooldownTimer = attackCooldown;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         shootingScript = GetComponent<Enemy_Shooting>();
@@ -52,10 +54,9 @@ public class Enemy_TNT_Movement : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log($"Attack cooldown timer: {attackCooldownTimer}");
         if (enemyState != EnemyState.Knockback)
         {
-            //Debug.Log(attackCooldownTimer);
-            // Update cooldown timer
             if (attackCooldownTimer > 0)
             {
                 attackCooldownTimer -= Time.deltaTime;
@@ -67,21 +68,31 @@ public class Enemy_TNT_Movement : MonoBehaviour
             // Handle different states
             if (enemyState == EnemyState.Chase)
             {
-                Debug.Log("Chasing the player");
                 Chase();
             }
             else if (enemyState == EnemyState.Attack)
             {
-                rb.velocity = Vector2.zero; // Stop the enemy when attacking
-
-                // Face the player when attacking
-                if (player != null)
+                if (attackCooldownTimer > 0)
                 {
-                    if ((player.position.x > transform.position.x && facingDirection == -1) ||
-                        (player.position.x < transform.position.x && facingDirection == 1))
+                    // If cooldown is not met, transition to Idle
+                    ChangeState(EnemyState.Idle);
+                    rb.velocity = Vector2.zero; // Stop movement
+                }
+                else
+                {
+                    rb.velocity = Vector2.zero; // Stop the enemy when attacking
+
+                    // Face the player when attacking
+                    if (player != null)
                     {
-                        Flip();
+                        if ((player.position.x > transform.position.x && facingDirection == -1) ||
+                            (player.position.x < transform.position.x && facingDirection == 1))
+                        {
+                            Flip();
+                        }
                     }
+
+                    // animation event handle attack
                 }
             }
             else if (enemyState == EnemyState.Patrol)
@@ -94,7 +105,7 @@ public class Enemy_TNT_Movement : MonoBehaviour
             }
         }
     }
-
+    #region Player movement
     void Patrol()
     {
         if (isWaiting)
@@ -157,61 +168,6 @@ public class Enemy_TNT_Movement : MonoBehaviour
         localScale.x *= -1;
         transform.localScale = localScale;
     }
-
-    private void CheckForPlayer()
-    {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(detectionPoint.position, playerDetectionRange, playerLayer);
-
-        if (hitColliders.Length > 0)
-        {
-            player = hitColliders[0].transform;
-            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
-            // Priority: Attack > Chase
-            if (distanceToPlayer <= attackRange)
-            {
-                //Debug.Log("Player is within attack range");
-                rb.velocity = Vector2.zero;
-
-                // Change to attack state if not already in it
-                if (enemyState != EnemyState.Attack && attackCooldownTimer <= 0)
-                {
-                    ChangeState(EnemyState.Attack);
-                    PerformAttack();
-                }
-                //else
-                //{
-                //    ChangeState(EnemyState.Idle);
-                //}
-            }
-            else if (distanceToPlayer > attackRange)
-            {
-                // Player is in detection range but outside attack range - chase them
-                //Debug.Log("Player detected but outside attack range - chasing");
-                if (enemyState != EnemyState.Chase)
-                {
-                    ChangeState(EnemyState.Chase);
-                }
-            }
-        }
-        else
-        {
-            // No player detected - return to patrol
-            //Debug.Log("No player detected - returning to patrol");
-            player = null;
-            if (enemyState != EnemyState.Patrol && enemyState != EnemyState.Idle)
-            {
-                rb.velocity = Vector2.zero;
-                ChangeState(EnemyState.Patrol);
-            }
-        }
-    }
-
-    private void PerformAttack()
-    {
-        attackCooldownTimer = attackCooldown;
-    }
-
     public void ChangeState(EnemyState newState)
     {
         // Exit current state
@@ -256,7 +212,66 @@ public class Enemy_TNT_Movement : MonoBehaviour
     public void Attack()
     {
         Debug.Log("Enemy attacks the player!");
+
+        // Call the Shoot() method from the Enemy_Shooting script
+        if (shootingScript != null)
+        {
+            shootingScript.Shoot();
+        }
+        else
+        {
+            Debug.LogWarning("Shooting script is not assigned!");
+        }
+
+        // Reset the attack cooldown timer
+        attackCooldownTimer = attackCooldown;
     }
+    #endregion
+
+    private void CheckForPlayer()
+    {
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(detectionPoint.position, playerDetectionRange, playerLayer);
+
+        if (hitColliders.Length > 0)
+        {
+            player = hitColliders[0].transform;
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+            // Priority: Attack > Chase
+            if (distanceToPlayer <= attackRange)
+            {
+                rb.velocity = Vector2.zero;
+
+                // Change to attack state if not already in it
+                if (enemyState != EnemyState.Attack && attackCooldownTimer <= 0)
+                {
+                    ChangeState(EnemyState.Attack);
+                }
+            }
+            else if (distanceToPlayer > attackRange)
+            {
+                // Player is in detection range but outside attack range - chase them
+                //isAttacking = false; // Reset attacking flag when player moves out of range
+                if (enemyState != EnemyState.Chase)
+                {
+                    ChangeState(EnemyState.Chase);
+                }
+            }
+        }
+        else
+        {
+            // No player detected - return to patrol
+            Debug.Log("No player detected - returning to patrol");
+            player = null;
+            //isAttacking = false; // Reset attacking flag when no player detected
+            if (enemyState != EnemyState.Patrol && enemyState != EnemyState.Idle)
+            {
+                rb.velocity = Vector2.zero;
+                ChangeState(EnemyState.Patrol);
+            }
+        }
+    }
+
 
     private void OnDrawGizmosSelected()
     {
