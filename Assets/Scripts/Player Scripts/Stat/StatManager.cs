@@ -17,6 +17,12 @@ public class StatManager : MonoBehaviour
     public float cooldown;
 
     [Header("Movement Stats")]
+    public float maxStamina;
+    public float currentStamina;
+    public float staminaRegenRate;
+    public float staminaCost;
+    public float dashDelay;
+    public float dashDuration;
     public float moveSpeed;
 
     [Header("Exp Stats")]
