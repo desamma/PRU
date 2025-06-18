@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Dash(new Vector2(horizontal, vertical));
         }
-        if (isKnockedBack || isDashing)
+        /*if (isKnockedBack || isDashing)
         {
             // If the player is knocked back, we can skip the movement logic
             return;
@@ -63,11 +63,11 @@ public class PlayerMovement : MonoBehaviour
         // Normalize the movement vector to ensure consistent speed in all directions
         Vector2 input = new Vector2(horizontal, vertical);
         rb.velocity = input.sqrMagnitude > 0 ? StatManager.instance.moveSpeed * input.normalized : Vector2.zero;
-        //rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);
+        //rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);*/
     }
 
     // FixedUpdate is called 50x per second by default in Unity, suitable for physics updates
-    /*void FixedUpdate()
+    void FixedUpdate()
     {
         if (isKnockedBack || isDashing)
         {
@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = input.sqrMagnitude > 0 ? StatManager.instance.moveSpeed * input.normalized : Vector2.zero;
         //rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);
 
-    }*/
+    }
 
     void Dash(Vector2 direction)
     {

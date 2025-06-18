@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatsUI : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class StatsUI : MonoBehaviour
     //public StatSlot[] stats;
     public CanvasGroup statsCanvas;
     public TMP_Text availablePointsText;
+    [SerializeField]
+    private PlayerHealth playerHealth;
 
     private void OnEnable()
     {
@@ -33,6 +36,11 @@ public class StatsUI : MonoBehaviour
             if (statSlot != null)
             {
                 statSlot.statButton.onClick.AddListener(statSlot.TryUpgradeStat);
+
+                // Disable navigation to prevent weird UI behavior
+                Navigation nav = statSlot.statButton.navigation;
+                nav.mode = Navigation.Mode.None;
+                statSlot.statButton.navigation = nav;
             }
         }
         UpdateAbilityPoints();
@@ -75,6 +83,7 @@ public class StatsUI : MonoBehaviour
     public void UpdateHealth()
     {
         statSlots[0].GetComponentInChildren<TMP_Text>().text = "Health: " + StatManager.instance.maxHealth.ToString();
+        playerHealth.UpdateHealth();
     }
 
     public void UpdateDamage()

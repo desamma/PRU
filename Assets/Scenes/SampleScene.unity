@@ -15028,6 +15028,7 @@ MonoBehaviour:
   - {fileID: 1716384152}
   statsCanvas: {fileID: 205693709}
   availablePointsText: {fileID: 1923786706}
+  playerHealth: {fileID: 42387541}
 --- !u!1 &663735626
 GameObject:
   m_ObjectHideFlags: 0
@@ -19096,7 +19097,7 @@ Tilemap:
       - {fileID: 630750898, guid: 7798a9bcab4907e44a7a8443e33e1067, type: 3}
       - {fileID: -1517726308, guid: 7798a9bcab4907e44a7a8443e33e1067, type: 3}
       - {fileID: 149185505, guid: 7798a9bcab4907e44a7a8443e33e1067, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 17, y: -9, z: 0}
@@ -19366,7 +19367,7 @@ Tilemap:
       - {fileID: 1082394103, guid: ad054c9181195694b95a90c84714fb52, type: 3}
       - {fileID: -1804519429, guid: ad054c9181195694b95a90c84714fb52, type: 3}
       - {fileID: 98724905, guid: ad054c9181195694b95a90c84714fb52, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 0, y: -5, z: 0}
@@ -19711,7 +19712,7 @@ Tilemap:
       - {fileID: 1082394103, guid: ad054c9181195694b95a90c84714fb52, type: 3}
       - {fileID: -1804519429, guid: ad054c9181195694b95a90c84714fb52, type: 3}
       - {fileID: 98724905, guid: ad054c9181195694b95a90c84714fb52, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 23, y: -5, z: 0}
@@ -19831,7 +19832,7 @@ Tilemap:
       - {fileID: 1082394103, guid: ad054c9181195694b95a90c84714fb52, type: 3}
       - {fileID: -1804519429, guid: ad054c9181195694b95a90c84714fb52, type: 3}
       - {fileID: 98724905, guid: ad054c9181195694b95a90c84714fb52, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 31, y: -5, z: 0}
@@ -19981,7 +19982,7 @@ Tilemap:
       - {fileID: 1082394103, guid: ad054c9181195694b95a90c84714fb52, type: 3}
       - {fileID: -1804519429, guid: ad054c9181195694b95a90c84714fb52, type: 3}
       - {fileID: 98724905, guid: ad054c9181195694b95a90c84714fb52, type: 3}
-      m_AnimationSpeed: 5.0000005
+      m_AnimationSpeed: 5
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 44, y: 2, z: 0}
@@ -24645,7 +24646,7 @@ Tilemap:
       - {fileID: 416372466, guid: 773f5d80dbf2b9b41906524a406ec14a, type: 3}
       - {fileID: -1292570854, guid: 773f5d80dbf2b9b41906524a406ec14a, type: 3}
       - {fileID: 845392449, guid: 773f5d80dbf2b9b41906524a406ec14a, type: 3}
-      m_AnimationSpeed: 5
+      m_AnimationSpeed: 5.0000005
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 20, y: -2, z: 0}
