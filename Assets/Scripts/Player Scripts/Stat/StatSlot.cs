@@ -25,6 +25,7 @@ public class StatSlot : MonoBehaviour
         {
             //statIcon.sprite = statSO.statIcon;
             statButton.interactable = true;
+            statButton.navigation = new Navigation { mode = Navigation.Mode.None };
             UpdateUI();
         }
     }
