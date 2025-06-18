@@ -179,7 +179,13 @@ public class TorchEnemy_Spawner : MonoBehaviour
     {
         timeUntilSpawn = Random.Range(minimumSpawnTime, maximumSpawnTime);
     }
-
+    
+    /// <summary>
+    /// the method will scale the gizmo circle when:
+    ///     scale the Spawner GameObject(Transform > Scale)
+    ///     scale the parent of the Spawner(lossyScale includes parent scale)
+    ///     move the collider's offset (circle shift its center accordingly)
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         if (!TryGetComponent<CircleCollider2D>(out var collider)) return;
