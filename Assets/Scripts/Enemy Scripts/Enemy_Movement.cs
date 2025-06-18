@@ -25,6 +25,8 @@ public class Enemy_Movement : MonoBehaviour
     int currentPatrolIndex = 0;
     private bool isWaiting = false;
     [SerializeField] private float idleToPatrolWaitTime;
+    private float unstuckPatrolWaitTime = 1f;
+    private float unstuckPatrolWaitTimer;
     private float waitTimer = 0f;
 
     private Vector3 originalPosition;
@@ -55,6 +57,8 @@ public class Enemy_Movement : MonoBehaviour
         //audioClip = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         ChangeState(EnemyState.Idle);
+        unstuckPatrolWaitTime *= patrolDistance / 2;
+        unstuckPatrolWaitTimer = unstuckPatrolWaitTime;
         //originalPosition = transform.position; // Store the original position for potential patrol logic
         facingDirection = transform.localScale.x > 0 ? 1 : -1; // Determine initial facing direction based on local scale
     }
@@ -110,21 +114,31 @@ public class Enemy_Movement : MonoBehaviour
             }
             return;
         }
-
-        Vector3 targetPos = patrolPoints[currentPatrolIndex];
-        Vector3 direction = (targetPos - transform.position).normalized;
-        rb.velocity = direction * speed;
-
-        if ((targetPos.x > transform.position.x && facingDirection == -1) ||
-            (targetPos.x < transform.position.x && facingDirection == 1))
+        if (unstuckPatrolWaitTimer > 0)
         {
-            Flip();
-        }
+            unstuckPatrolWaitTimer -= Time.deltaTime;
 
-        //imprecision in floating-point distance and movement
-        if (Vector2.Distance(transform.position, targetPos) < 0.2f)
+            Vector3 targetPos = patrolPoints[currentPatrolIndex];
+            Vector3 direction = (targetPos - transform.position).normalized;
+            rb.velocity = direction * speed;
+
+            if ((targetPos.x > transform.position.x && facingDirection == -1) ||
+                (targetPos.x < transform.position.x && facingDirection == 1))
+            {
+                Flip();
+            }
+
+            //imprecision in floating-point distance and movement
+            if (Vector2.Distance(transform.position, targetPos) < 0.2f)
+            {
+                rb.velocity = Vector2.zero;
+                isWaiting = true;
+            }
+        }
+        else
         {
             rb.velocity = Vector2.zero;
+            unstuckPatrolWaitTimer = unstuckPatrolWaitTime; // Reset the timer
             isWaiting = true;
         }
     }
