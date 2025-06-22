@@ -24,14 +24,14 @@ public class Enemy_Shooting : MonoBehaviour
         // Check if we've reached the projectile limit
         if (activeProjectiles.Count >= maxProjectiles)
         {
-            Debug.Log("Maximum projectiles reached, cannot shoot");
+            //Debug.Log("Maximum projectiles reached, cannot shoot");
             return;
         }
 
         // Check if attack point is assigned
         if (attackPoint == null)
         {
-            Debug.LogWarning("Attack point not assigned!");
+            //Debug.LogWarning("Attack point not assigned!");
             return;
         }
 
@@ -65,12 +65,12 @@ public class Enemy_Shooting : MonoBehaviour
                 // Destroy projectile after lifetime and remove from list
                 StartCoroutine(DestroyProjectileAfterTime(projectile, projectileLifeTime));
 
-                Debug.Log($"Projectile fired at player! Active projectiles: {activeProjectiles.Count}");
+                //Debug.Log($"Projectile fired at player! Active projectiles: {activeProjectiles.Count}");
             }
         }
         else
         {
-            Debug.Log("No player in attack range to shoot at");
+            //Debug.Log("No player in attack range to shoot at");
         }
     }
 

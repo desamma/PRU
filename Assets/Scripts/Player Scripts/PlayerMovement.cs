@@ -74,8 +74,8 @@ public class PlayerMovement : MonoBehaviour
             // If the player is knocked back, we can skip the movement logic
             return;
         }
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
 
         if (horizontal > 0 && transform.localScale.x < 0 || horizontal < 0 && transform.localScale.x > 0)
         {

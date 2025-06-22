@@ -160,7 +160,7 @@ public class Enemy_Movement : MonoBehaviour
 
             if (Vector2.Distance(transform.position, player.position) <= attackRange)
             {
-                Debug.Log("Player is within attack range");
+                //Debug.Log("Player is within attack range");
                 rb.velocity = Vector2.zero; // Stop the enemy when attacking
                 if (attackCooldownTimer <= 0)
                 {
