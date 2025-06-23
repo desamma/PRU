@@ -9,9 +9,11 @@ public class Barrel : MonoBehaviour
     public float stunTime = 0.5f;
     public float destroyTime = 1.5f; // Time before the barrel is destroyed after explosion
     public float explosionRadius = 2f; // Radius of the explosion effect
+    public float enemySpawnChance = 12f;
+    public GameObject enemyPrefab;
 
     private bool isExploded = false; // Flag to prevent multiple explosions
-
+    
     private void Awake()
     {
         animator.updateMode = AnimatorUpdateMode.AnimatePhysics; // Ensure the animator updates in sync with physics
@@ -61,8 +63,26 @@ public class Barrel : MonoBehaviour
             }
         }
 
+        SpawnEnemy(); // Attempt to spawn an enemy after explosion
         // Destroy the barrel after a short delay to allow the animation to play
         Destroy(gameObject, destroyTime);
+
+    }
+
+    public void SpawnEnemy()
+    {
+        // Check if the enemy prefab is assigned
+        if (enemyPrefab == null)
+        {
+            Debug.LogWarning("Enemy prefab is not assigned in the Barrel script.");
+            return;
+        }
+
+        // Randomly spawn an enemy based on the defined chance
+        if (Random.Range(0f, 100f) < enemySpawnChance)
+        {
+            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+        }
     }
 
     private void OnDrawGizmosSelected()

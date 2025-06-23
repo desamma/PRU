@@ -6,7 +6,7 @@ public enum EnemyPoint
     Melee = 1,
     Ranged = 2,
     TorchBoss = 5,
-    Dragon = 10
+    Dragon = 99
 }
 
 public class TorchEnemy_Spawner : MonoBehaviour
