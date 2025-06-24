@@ -189,4 +189,6 @@ MonoBehaviour:
   knockbackForce: 10
   stunTime: 0.5
   destroyTime: 1.5
-  explosionRadius: 1
+  explosionRadius: 2
+  enemySpawnChance: 10
+  enemyPrefab: {fileID: 3456281964575311268, guid: 72d3f9522bed0f741abd20bb9f14799c, type: 3}
