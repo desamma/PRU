@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283519de181134f4f8bed981c53304a1, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Gold
   itemDescription: Cold hard cash
   itemIcon: {fileID: 21300000, guid: cd2fdb40f5d44484ca0be59a510cd39d, type: 3}
   isGold: 1
+  stackSize: 10
   currentHealth: 0
   maxHealth: 0
   speed: 0
