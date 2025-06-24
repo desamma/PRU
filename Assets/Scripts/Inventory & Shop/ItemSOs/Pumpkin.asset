@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283519de181134f4f8bed981c53304a1, type: 3}
+  m_Name: Pumpkin
+  m_EditorClassIdentifier: 
+  itemName: Pumpkin
+  itemDescription: Spooky
+  itemIcon: {fileID: 21300000, guid: cd588cdd6cc2f2f408d7365314cd9a46, type: 3}
+  isGold: 0
+  stackSize: 10
+  currentHealth: 2
+  maxHealth: 0
+  speed: 0
+  damage: 0
+  duration: 0

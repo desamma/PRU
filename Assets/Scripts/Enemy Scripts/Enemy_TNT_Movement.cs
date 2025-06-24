@@ -54,7 +54,7 @@ public class Enemy_TNT_Movement : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"Attack cooldown timer: {attackCooldownTimer}");
+        //Debug.Log($"Attack cooldown timer: {attackCooldownTimer}");
         if (enemyState != EnemyState.Knockback)
         {
             if (attackCooldownTimer > 0)
@@ -206,12 +206,12 @@ public class Enemy_TNT_Movement : MonoBehaviour
                 break;
         }
 
-        Debug.Log($"Enemy state changed to: {enemyState}");
+        //Debug.Log($"Enemy state changed to: {enemyState}");
     }
 
     public void Attack()
     {
-        Debug.Log("Enemy attacks the player!");
+        //Debug.Log("Enemy attacks the player!");
 
         // Call the Shoot() method from the Enemy_Shooting script
         if (shootingScript != null)
@@ -220,7 +220,7 @@ public class Enemy_TNT_Movement : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Shooting script is not assigned!");
+            //Debug.LogWarning("Shooting script is not assigned!");
         }
 
         // Reset the attack cooldown timer
@@ -261,7 +261,7 @@ public class Enemy_TNT_Movement : MonoBehaviour
         else
         {
             // No player detected - return to patrol
-            Debug.Log("No player detected - returning to patrol");
+            //Debug.Log("No player detected - returning to patrol");
             player = null;
             //isAttacking = false; // Reset attacking flag when no player detected
             if (enemyState != EnemyState.Patrol && enemyState != EnemyState.Idle)

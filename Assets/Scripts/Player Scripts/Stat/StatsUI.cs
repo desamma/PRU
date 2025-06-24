@@ -44,6 +44,9 @@ public class StatsUI : MonoBehaviour
             }
         }
         UpdateAbilityPoints();
+        statsCanvas.alpha = 0;
+        statsCanvas.interactable = false;
+        statsCanvas.blocksRaycasts = false;
     }
 
     private void Update()
@@ -55,19 +58,23 @@ public class StatsUI : MonoBehaviour
             {
                 Time.timeScale = 0; 
                 UpdateAllStats(); 
-                statsCanvas.alpha = 1; // Make stats visible
+                statsCanvas.alpha = 1; // Make stats visible and enable interaction
+                statsCanvas.interactable = true;
+                statsCanvas.blocksRaycasts = true;
             }
             else
             {
                 Time.timeScale = 1; 
                 statsCanvas.alpha = 0;
+                statsCanvas.interactable = false;
+                statsCanvas.blocksRaycasts = false;
             }
         }
     }
 
     public void UpdateAbilityPoints()
     {
-        availablePointsText.text = "Points: " + StatManager.instance.upgradePoint.ToString();
+        availablePointsText.text = "Points: " + StatManager.instance.upgradePoint;
     }
 
     private void HandleUpdateAbilityPoints(StatSlot slot)
@@ -75,25 +82,24 @@ public class StatsUI : MonoBehaviour
         if(StatManager.instance.upgradePoint > 0)
         {
             StatManager.instance.upgradePoint--;
-            availablePointsText.text = "Points: " + StatManager.instance.upgradePoint.ToString();
+            availablePointsText.text = "Points: " + StatManager.instance.upgradePoint;
             StatManager.instance.UpgradeStat(slot.statName, 1);
-            UpdateAllStats();
         }
     }
     public void UpdateHealth()
     {
-        statSlots[0].GetComponentInChildren<TMP_Text>().text = "Health: " + StatManager.instance.maxHealth.ToString();
+        statSlots[0].GetComponentInChildren<TMP_Text>().text = "Health: " + StatManager.instance.maxHealth;
         playerHealth.UpdateHealth();
     }
 
     public void UpdateDamage()
     {
-        statSlots[1].GetComponentInChildren<TMP_Text>().text = "Damage: " + StatManager.instance.damage.ToString();
+        statSlots[1].GetComponentInChildren<TMP_Text>().text = "Damage: " + StatManager.instance.damage;
     }
 
     public void UpdateSpeed()
     {
-        statSlots[2].GetComponentInChildren<TMP_Text>().text = "Speed: " + StatManager.instance.moveSpeed.ToString();
+        statSlots[2].GetComponentInChildren<TMP_Text>().text = "Speed: " + StatManager.instance.moveSpeed;
     }
 
 
