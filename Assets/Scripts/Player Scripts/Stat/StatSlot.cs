@@ -17,8 +17,7 @@ public class StatSlot : MonoBehaviour
     public static event Action<StatSlot> OnAbilityPointsSpent;
 
     public TMP_Text statText;
-
-    //TODO: remove later
+    
     public void OnValidate()
     {
         if (statSO != null)
@@ -26,7 +25,6 @@ public class StatSlot : MonoBehaviour
             //statIcon.sprite = statSO.statIcon;
             statButton.interactable = true;
             statButton.navigation = new Navigation { mode = Navigation.Mode.None };
-            UpdateUI();
         }
     }
 
@@ -34,7 +32,6 @@ public class StatSlot : MonoBehaviour
     {
         if (StatManager.instance.upgradePoint > 0)
         {
-            UpdateUI();
             OnAbilityPointsSpent?.Invoke(this); //null check to ensure the event is subscribed to
         }
         else
@@ -42,11 +39,4 @@ public class StatSlot : MonoBehaviour
             Debug.Log("Not enough points to upgrade " + statName);
         }
     }
-
-    //TODO: remove later
-    private void UpdateUI()
-    {
-        Debug.Log("Updating UI");
-    }
-
 }

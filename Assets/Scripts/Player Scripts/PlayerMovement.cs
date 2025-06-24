@@ -42,28 +42,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Dash(new Vector2(horizontal, vertical));
         }
-        /*if (isKnockedBack || isDashing)
-        {
-            // If the player is knocked back, we can skip the movement logic
-            return;
-        }
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-
-        if (horizontal > 0 && transform.localScale.x < 0 || horizontal < 0 && transform.localScale.x > 0)
-        {
-            Flip();
-        }
-
-        animator.SetFloat("horizontal", horizontal);
-        animator.SetFloat("vertical", vertical);
-
-        animator.SetBool("isMoving", horizontal != 0 || vertical != 0);
-
-        // Normalize the movement vector to ensure consistent speed in all directions
-        Vector2 input = new Vector2(horizontal, vertical);
-        rb.velocity = input.sqrMagnitude > 0 ? StatManager.instance.moveSpeed * input.normalized : Vector2.zero;
-        //rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);*/
     }
 
     // FixedUpdate is called 50x per second by default in Unity, suitable for physics updates
@@ -77,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
-        if (horizontal > 0 && transform.localScale.x < 0 || horizontal < 0 && transform.localScale.x > 0)
+        if (horizontal > 0 && transform.localScale.x < 0 || horizontal < 0 && transform.localScale.x > 0 && !animator.GetBool("isAttacking"))
         {
             Flip();
         }
@@ -110,8 +88,6 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator DashCooldown()
     {
-        //yield return new WaitForSeconds(delay);
-        //rb.velocity = new Vector2(facingDirection * StatManager.instance.moveSpeed, rb.velocity.y); // Reset to normal speed after dash
         isDashingAvailable = false;
         float startTime = Time.time;
 

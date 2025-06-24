@@ -3,6 +3,8 @@ using UnityEngine;
 public class StatManager : MonoBehaviour
 {
     public static StatManager instance;
+    [SerializeField]
+    private StatsUI statsUI;
 
     [Header("Health Stats")]
     public float maxHealth;
@@ -62,7 +64,7 @@ public class StatManager : MonoBehaviour
     //    level = 1;
     //    upgradePoint = 0;
     //}
-
+    
     public void UpgradeStat(string statName, int amount)
     {
         switch (statName)
@@ -81,19 +83,32 @@ public class StatManager : MonoBehaviour
                 break;
         }
     }
+    
+    public void AddHealth(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        statsUI.UpdateHealth();
+    }
 
     public void AddMaxHealth(int amount)
     {
         maxHealth += amount;
+        statsUI.UpdateHealth();
     }
 
     public void AddAttack(int amount)
     {
         damage += amount;
+        statsUI.UpdateDamage();
     }
 
     public void AddSpeed(int amount)
     {
         moveSpeed += amount;
+        statsUI.UpdateSpeed();
     }
 }
