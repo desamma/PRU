@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,10 +15,26 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     public TMP_Text quantityText;
     
     private InventoryManager inventoryManager;
+    private static ShopManager activeShop;
 
     private void Start()
     {
         inventoryManager = GetComponentInParent<InventoryManager>();
+    }
+
+    private void OnEnable()
+    {
+        ShopKeeper.OnShopStateChange += HandleShopStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        ShopKeeper.OnShopStateChange -= HandleShopStateChanged;
+    }
+
+    private void HandleShopStateChanged(ShopManager shopManager, bool isOpen)
+    {
+        activeShop = isOpen ? shopManager : null;
     }
 
     /*private void Update()
@@ -39,6 +56,7 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
 
     public void UpdateUI()
     {
+        if (quantity <= 0) itemSO = null;
         if (itemSO != null)
         {
             itemImage.sprite = itemSO.itemIcon;
@@ -56,14 +74,23 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler
     {
         if (quantity > 0)
         {
-            if (eventData.button == PointerEventData.InputButton.Left)
+            if (activeShop != null)
             {
-                if (itemSO.currentHealth > 0 && StatManager.instance.currentHealth >= StatManager.instance.maxHealth) return;
-                inventoryManager.UseItem(this);
+                activeShop.SellItem(itemSO);
+                quantity--;
+                UpdateUI();
             }
-            else if (eventData.button == PointerEventData.InputButton.Right)
+            else
             {
-                inventoryManager.DropItem(this);
+                if (eventData.button == PointerEventData.InputButton.Left)
+                {
+                    if (itemSO.currentHealth > 0 && StatManager.instance.currentHealth >= StatManager.instance.maxHealth) return;
+                    inventoryManager.UseItem(this);
+                }
+                else if (eventData.button == PointerEventData.InputButton.Right)
+                {
+                    inventoryManager.DropItem(this);
+                }
             }
         }
     }

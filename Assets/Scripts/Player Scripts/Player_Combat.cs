@@ -8,7 +8,7 @@ public class Player_Combat : MonoBehaviour
     public Animator animator;
 
     private float timer;
-    private float attackRange = 1;
+    private float attackRange = 1.5f;
 
     private void Update()
     {

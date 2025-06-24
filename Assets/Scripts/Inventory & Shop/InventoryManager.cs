@@ -29,7 +29,7 @@ public class InventoryManager : MonoBehaviour
         Loot.OnItemLooted -= AddItem;
     }
 
-    private void AddItem(ItemSO item, int quantity)
+    public void AddItem(ItemSO item, int quantity)
     {
         if (item.isGold)
         {
