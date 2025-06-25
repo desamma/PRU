@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -229,6 +229,8 @@ MonoBehaviour:
   itemImage: {fileID: 2290147747712636254}
   statButton: {fileID: 8841658785830151661}
   shopManager: {fileID: 0}
+  shopInfo: {fileID: 0}
+  price: 0
 --- !u!1 &6356944565985081710
 GameObject:
   m_ObjectHideFlags: 0
