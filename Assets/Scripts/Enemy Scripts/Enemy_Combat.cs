@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Combat : MonoBehaviour
@@ -11,21 +9,35 @@ public class Enemy_Combat : MonoBehaviour
     public float stunTime;
     public LayerMask playerLayer;
 
-    /*private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-damage);
         }
-    }*/
+    }
 
     public void Attack()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
-        if (hits.Length > 0)
+        // Detect objects in the attack range
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+
+        foreach (Collider2D hit in hits)
         {
-            hits[0].GetComponent<PlayerHealth>().ChangeHealth(-damage);
-            hits[0].GetComponent<PlayerMovement>().KnockBack(transform,knockbackForce,stunTime);
+            // Check if the object is a player
+            if (hit.CompareTag("Player"))
+            {
+                hit.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+                hit.GetComponent<PlayerMovement>().KnockBack(transform, knockbackForce, stunTime);
+            }
+            // Check if the object is a barrel
+            else if (hit.CompareTag("Barrel"))
+            {
+                if (hit.TryGetComponent<Barrel>(out var barrel))
+                {
+                    barrel.Explode(); // Trigger the barrel's explosion
+                }
+            }
         }
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Combat : MonoBehaviour
@@ -10,10 +8,11 @@ public class Player_Combat : MonoBehaviour
     public Animator animator;
 
     private float timer;
+    private float attackRange = 1;
 
     private void Update()
     {
-        if(timer > 0)
+        if (timer > 0)
         {
             timer -= Time.deltaTime;
         }
@@ -30,12 +29,24 @@ public class Player_Combat : MonoBehaviour
 
     public void DealDamage()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, StatManager.instance.weaponRange, enemyLayer);
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint.position, StatManager.instance.weaponRange);
 
-        if (enemies.Length > 0)
+        foreach (Collider2D hitObject in hitObjects)
         {
-            enemies[0].GetComponent<Enemy_Health>().ChangeHealth(-StatManager.instance.damage);
-            enemies[0].GetComponent<Enemy_Knockback>().KnockBack(transform, StatManager.instance.knockbackForce, StatManager.instance.knockbackTime, StatManager.instance.stunTime);
+            // Check if the object is an enemy
+            if (hitObject.CompareTag("Enemy"))
+            {
+                hitObject.GetComponent<Enemy_Health>().ChangeHealth(-StatManager.instance.damage);
+                hitObject.GetComponent<Enemy_Knockback>().KnockBack(transform, StatManager.instance.knockbackForce, StatManager.instance.knockbackTime, StatManager.instance.stunTime);
+            }
+            // Check if the object is a barrel
+            else if (hitObject.CompareTag("Barrel"))
+            {
+                if (hitObject.TryGetComponent<Barrel>(out var barrel))
+                {
+                    barrel.Explode(); // Trigger the barrel's explosion
+                }
+            }
         }
     }
 
@@ -49,7 +60,7 @@ public class Player_Combat : MonoBehaviour
         if (attackPoint != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPoint.position, StatManager.instance.weaponRange);
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         }
     }
 }

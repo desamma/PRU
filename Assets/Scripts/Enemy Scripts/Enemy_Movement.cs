@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public enum EnemyState
@@ -16,22 +13,43 @@ public class Enemy_Movement : MonoBehaviour
 {
     public float speed = 1f;
     public float attackRange = 2f;
-    public float attackCooldown = 2f; 
+    public float attackCooldown = 2f;
     public float playerDetectionRange = 5f;
     public Transform detectionPoint;
     public Transform attackPoint;
     public LayerMask playerLayer;
+
+    //patrolling
+    private Vector3[] patrolPoints;
+    public float patrolDistance;
+    int currentPatrolIndex = 0;
+    private bool isWaiting = false;
+    [SerializeField] private float idleToPatrolWaitTime;
+    private float unstuckPatrolWaitTime = 1f;
+    private float unstuckPatrolWaitTimer;
+    private float waitTimer = 0f;
 
     private Vector3 originalPosition;
     private float attackCooldownTimer;
     private int facingDirection;
     //private AudioSource audioClip;
     private EnemyState enemyState;
-    public float noPlayerTimer = 0f; // Timer for no player detection
+    //public float noPlayerTimer = 0f; // Timer for no player detection
 
     private Rigidbody2D rb;
     private Transform player;
     private Animator animator;
+
+    private void Awake()
+    {
+        originalPosition = transform.position;
+
+        patrolPoints = new Vector3[4];
+        patrolPoints[0] = originalPosition + Vector3.up * patrolDistance;
+        patrolPoints[1] = originalPosition + Vector3.down * patrolDistance;
+        patrolPoints[2] = originalPosition + Vector3.left * patrolDistance;
+        patrolPoints[3] = originalPosition + Vector3.right * patrolDistance;
+    }
 
     void Start()
     {
@@ -39,6 +57,8 @@ public class Enemy_Movement : MonoBehaviour
         //audioClip = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         ChangeState(EnemyState.Idle);
+        unstuckPatrolWaitTime *= patrolDistance / 2;
+        unstuckPatrolWaitTimer = unstuckPatrolWaitTime;
         //originalPosition = transform.position; // Store the original position for potential patrol logic
         facingDirection = transform.localScale.x > 0 ? 1 : -1; // Determine initial facing direction based on local scale
     }
@@ -54,7 +74,7 @@ public class Enemy_Movement : MonoBehaviour
             }
             if (enemyState == EnemyState.Chase)
             {
-                Debug.Log("Chasing the player");
+                //Debug.Log("Chasing the player");
                 Chase();
             }
             else if (enemyState == EnemyState.Attack)
@@ -62,11 +82,69 @@ public class Enemy_Movement : MonoBehaviour
                 rb.velocity = Vector2.zero; // Stop the enemy when attacking
                 //Debug.Log("Attacking the player");
             }
+            else if (enemyState == EnemyState.Patrol)
+            {
+                Patrol();
+            }
+        }
+    }
+
+    void Patrol()
+    {
+        //if waiting, idle
+        if (isWaiting)
+        {
+            ChangeState(EnemyState.Idle);
+            waitTimer += Time.deltaTime;
+
+            if (waitTimer >= idleToPatrolWaitTime)
+            {
+                isWaiting = false;
+                waitTimer = 0f;
+
+                // Pick a new random patrol index (different from current)
+                int newIndex;
+                do
+                {
+                    newIndex = Random.Range(0, patrolPoints.Length);
+                } while (newIndex == currentPatrolIndex);
+
+                currentPatrolIndex = newIndex;
+                ChangeState(EnemyState.Patrol); // Resume patrolling
+            }
+            return;
+        }
+        if (unstuckPatrolWaitTimer > 0)
+        {
+            unstuckPatrolWaitTimer -= Time.deltaTime;
+
+            Vector3 targetPos = patrolPoints[currentPatrolIndex];
+            Vector3 direction = (targetPos - transform.position).normalized;
+            rb.velocity = direction * speed;
+
+            if ((targetPos.x > transform.position.x && facingDirection == -1) ||
+                (targetPos.x < transform.position.x && facingDirection == 1))
+            {
+                Flip();
+            }
+
+            //imprecision in floating-point distance and movement
+            if (Vector2.Distance(transform.position, targetPos) < 0.2f)
+            {
+                rb.velocity = Vector2.zero;
+                isWaiting = true;
+            }
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+            unstuckPatrolWaitTimer = unstuckPatrolWaitTime; // Reset the timer
+            isWaiting = true;
         }
     }
 
     void Chase()
-    { 
+    {
         if (player.position.x > transform.position.x && facingDirection == -1 ||
                 player.position.x < transform.position.x && facingDirection == 1)
         {
@@ -96,7 +174,7 @@ public class Enemy_Movement : MonoBehaviour
 
             if (Vector2.Distance(transform.position, player.position) <= attackRange)
             {
-                Debug.Log("Player is within attack range");
+                //Debug.Log("Player is within attack range");
                 rb.velocity = Vector2.zero; // Stop the enemy when attacking
                 if (attackCooldownTimer <= 0)
                 {
@@ -109,39 +187,13 @@ public class Enemy_Movement : MonoBehaviour
                 ChangeState(EnemyState.Chase);
             }
         }
-        /*else if (Vector2.Distance(originalPosition, transform.position) > 0.1f && hitColliders.Length <= 0 && noPlayerTimer > 2f)
-        {
-            // If no player is detected, return to the original position (patrol logic can be added here)
-            Vector2 direction = (originalPosition - transform.position).normalized;
-            if (originalPosition.x > transform.position.x && facingDirection == -1 ||
-            originalPosition.x < transform.position.x && facingDirection == 1)
-            {
-                Flip();
-            }
-            else
-            {
-                rb.velocity = direction * speed;
-                ChangeState(EnemyState.Patrol);
-            }
-        }*/
         else
         {
             //noPlayerTimer += Time.deltaTime; // Increment the timer when no player is detected
             rb.velocity = Vector2.zero; // Stop the enemy when not chasing
-            ChangeState(EnemyState.Idle);
+            ChangeState(EnemyState.Patrol);
         }
     }
-
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Player")
-    //    {
-    //        audioClip.Play();
-    //        /*rb.velocity = Vector2.zero; // Stop the enemy when not chasing
-    //        ChangeState(EnemyState.Idle);*/
-    //    }
-    //}   
-
     public void ChangeState(EnemyState newState)
     {
         switch (enemyState)
@@ -179,11 +231,6 @@ public class Enemy_Movement : MonoBehaviour
         }
     }
 
-    public void Attack()
-    {
-        Debug.Log("Enemy attacks the player!");
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -191,4 +238,14 @@ public class Enemy_Movement : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        audioClip.Play();
+    //        /*rb.velocity = Vector2.zero; // Stop the enemy when not chasing
+    //        ChangeState(EnemyState.Idle);*/
+    //    }
+    //}   
+
 }
