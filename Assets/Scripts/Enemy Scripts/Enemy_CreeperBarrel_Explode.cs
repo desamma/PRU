@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.Build;
 using UnityEngine;
 
 public class Enemy_CreeperBarrel_Explode : MonoBehaviour
@@ -13,10 +12,12 @@ public class Enemy_CreeperBarrel_Explode : MonoBehaviour
     public float animationDelay = 0.3f;
     private bool isExploded = false; // Flag to prevent multiple explosions
 
+    private Enemy_CreeperBarrel_Movement movement;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        movement = GetComponent<Enemy_CreeperBarrel_Movement>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -53,6 +54,7 @@ public class Enemy_CreeperBarrel_Explode : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
     public void CollisionExplode()
     {
         if (isExploded) return;
@@ -81,12 +83,32 @@ public class Enemy_CreeperBarrel_Explode : MonoBehaviour
                 hitObject.GetComponent<Enemy_Health>().ChangeHealth(-damage);
                 hitObject.GetComponent<Enemy_Knockback>().KnockBack(transform, knockbackForce, stunTime, stunTime);
             }
+
+            if (hitObject.CompareTag("Terrain"))
+            {
+                rb.velocity = Vector2.zero;
+                /*
+                animator.SetBool("isChasing", false);
+                animator.SetBool("isExplode", true);*/
+                movement.ChangeState(CreeperEnemyState.Explode);
+                movement.chasingDisable = true; // Disable chasing to prevent further movement
+                StartCoroutine(TerrainExplodeDelay());
+            }
         }
 
         // Delay destroy to let animation play
         StartCoroutine(DestroyAfterDelay(animationDelay));
     }
 
+    private IEnumerator TerrainExplodeDelay()
+    {
+        //Fix bug not stop entirely
+        rb.velocity = Vector2.zero;
+        yield return new WaitForSeconds(animationDelay);
+        Explode();
+    }
+
+    // Delay destroy to let animation play
     private IEnumerator DestroyAfterDelay(float delay)
     {
         StartCoroutine(EnemyStopDelay(0.2f));
@@ -94,6 +116,7 @@ public class Enemy_CreeperBarrel_Explode : MonoBehaviour
         Destroy(gameObject);
     }
 
+    //Stop enemy movement first then destroy for sometimes (animation issue)
     private IEnumerator EnemyStopDelay(float delay)
     {
         rb.velocity = Vector2.zero;

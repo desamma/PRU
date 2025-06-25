@@ -29,7 +29,7 @@ public class Enemy_CreeperBarrel_Movement : MonoBehaviour
     [SerializeField] private float animationDelay = 0.5f;
     [SerializeField] private float explosionDelay = 2f;
 
-    //private bool playerDetected = false;
+    public bool chasingDisable = false;
     private bool isWakingUp = false;
     private bool hasExploded = false;
     private Vector2 targetPosition; // Where the player was detected
@@ -47,7 +47,7 @@ public class Enemy_CreeperBarrel_Movement : MonoBehaviour
 
     void Update()
     {
-        if (enemyState == CreeperEnemyState.Knockback || hasExploded)
+        if (enemyState == CreeperEnemyState.Knockback || hasExploded || chasingDisable)
             return;
 
         CheckForPlayer();
@@ -98,27 +98,46 @@ public class Enemy_CreeperBarrel_Movement : MonoBehaviour
 
     void MoveTowardsTarget()
     {
-        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
-
-        if (direction.x > 0 && facingDirection == -1 || direction.x < 0 && facingDirection == 1)
+        if (chasingDisable == false)
         {
-            Flip();
+            Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
+
+            if (direction.x > 0 && facingDirection == -1 || direction.x < 0 && facingDirection == 1)
+            {
+                Flip();
+            }
+
+            rb.velocity = direction * speed;
+
+            float hitDistance = Vector2.Distance(transform.position, targetPosition);
+
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explodeRange);
+
+            foreach (Collider2D hit in hits)
+            {
+                if (hit.CompareTag("Player"))
+                {
+                    rb.velocity = Vector2.zero;
+                    ChangeState(CreeperEnemyState.Explode);
+                    if (!hasExploded)
+                        StartCoroutine(Explode());
+                    return;
+                }
+            }
+
+            if (hitDistance <= explodeRange)
+            {
+                rb.velocity = Vector2.zero;
+                ChangeState(CreeperEnemyState.Explode);
+                if (!hasExploded)
+                    StartCoroutine(Explode());
+            }
         }
-
-        rb.velocity = direction * speed;
-
-        float hitDistance = Vector2.Distance(transform.position, targetPosition);
-
-        if (hitDistance <= explodeRange)
+        else
         {
             rb.velocity = Vector2.zero;
-            ChangeState(CreeperEnemyState.Explode);
-            if (!hasExploded)
-                StartCoroutine(Explode());
         }
     }
-
-
     IEnumerator CountdownToExplode()
     {
         yield return new WaitForSeconds(explosionDelay);
