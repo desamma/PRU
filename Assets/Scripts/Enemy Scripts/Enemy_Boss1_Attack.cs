@@ -1,19 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Shooting : MonoBehaviour
+public class Enemy_Boss1_Combat : MonoBehaviour
 {
+    public int damage = 1;
     public Transform attackPoint;
-    public float attackRange;
-    public LayerMask playerLayer;
+    public float attackRangeMelee;
 
     public float knockbackForce;
     public float stunTime;
-    public GameObject projectilePrefab;
+    public LayerMask playerLayer;
+    public float attackRangeRanged;
     public float projectileSpeed = 5f;
     public float projectileLifeTime = 5f;
     public int maxProjectiles = 10;
 
+    public GameObject projectilePrefab;
     private readonly List<GameObject> activeProjectiles = new();
 
     private void Update()
@@ -21,7 +23,38 @@ public class Enemy_Shooting : MonoBehaviour
         // Clean up destroyed projectiles from the list
         activeProjectiles.RemoveAll(projectile => projectile == null);
     }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+        }
+    }
 
+    public void Attack()
+    {
+        // Detect objects in the attack range
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRangeMelee);
+
+        foreach (Collider2D hit in hits)
+        {
+            // Check if the object is a player
+            if (hit.CompareTag("Player"))
+            {
+                hit.GetComponent<PlayerHealth>().ChangeHealth(-damage);
+                hit.GetComponent<PlayerMovement>().KnockBack(transform, knockbackForce, stunTime);
+            }
+            // Check if the object is a barrel
+            else if (hit.CompareTag("Barrel"))
+            {
+                if (hit.TryGetComponent<Barrel>(out var barrel))
+                {
+                    barrel.Explode(); // Trigger the barrel's explosion
+                }
+            }
+        }
+    }
     public void Shoot()
     {
         // Check if we've reached the projectile limit
@@ -39,7 +72,7 @@ public class Enemy_Shooting : MonoBehaviour
         }
 
         // Check for player in range
-        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPoint.position, attackRangeRanged, playerLayer);
 
         if (hits.Length > 0)
         {
@@ -76,7 +109,6 @@ public class Enemy_Shooting : MonoBehaviour
             //Debug.Log("No player in attack range to shoot at");
         }
     }
-
     private System.Collections.IEnumerator DestroyProjectileAfterTime(GameObject projectile, float time)
     {
         yield return new WaitForSeconds(time);
@@ -85,15 +117,6 @@ public class Enemy_Shooting : MonoBehaviour
         {
             activeProjectiles.Remove(projectile);
             Destroy(projectile);
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (attackPoint != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         }
     }
 }

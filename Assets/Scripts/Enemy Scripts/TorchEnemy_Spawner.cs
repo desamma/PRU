@@ -5,6 +5,7 @@ public enum EnemyPoint
 {
     Melee = 1,
     Ranged = 2,
+    Iran = 3,
     TorchBoss = 5,
     Dragon = 99
 }
@@ -58,10 +59,13 @@ public class TorchEnemy_Spawner : MonoBehaviour
                 case 1: // Ranged
                     enemyPoints[enemy_prefabs[i]] = EnemyPoint.Ranged;
                     break;
-                case 2: // TorchBoss
+                case 2: // Boom Boom
+                    enemyPoints[enemy_prefabs[i]] = EnemyPoint.Iran;
+                    break;
+                case 3: // TorchBoss
                     enemyPoints[enemy_prefabs[i]] = EnemyPoint.TorchBoss;
                     break;
-                case 3: // Dragon
+                case 4: // Dragon
                     enemyPoints[enemy_prefabs[i]] = EnemyPoint.Dragon;
                     break;
                 default:

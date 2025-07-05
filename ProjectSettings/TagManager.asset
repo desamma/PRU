@@ -8,6 +8,7 @@ TagManager:
   - Terrain
   - Barrel
   - Bullet
+  - Boss1
   layers:
   - Default
   - TransparentFX
