@@ -91,8 +91,6 @@ public class Enemy_TNT_Movement : MonoBehaviour
                             Flip();
                         }
                     }
-
-                    // animation event handle attack
                 }
             }
             else if (enemyState == EnemyState.Patrol)
