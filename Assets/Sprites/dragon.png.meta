@@ -1,0 +1,1532 @@
+fileFormatVersion: 2
+guid: fb96056554d0dc440b8f4efcb97fb3b5
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dragon_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 943
+        width: 71
+        height: 113
+      alignment: 9
+      pivot: {x: 0.8309859, y: 0.7256637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a97d52c7b2a673e45a04c30ac4b0046d
+      internalID: -1548402484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_1
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 943
+        width: 75
+        height: 113
+      alignment: 9
+      pivot: {x: 0.7866667, y: 0.7256637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae790ef623ba6b4ba9a211c6bb40e6b
+      internalID: -788157840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 943
+        width: 71
+        height: 113
+      alignment: 9
+      pivot: {x: 0.80281687, y: 0.7256637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a79590bc46f3d3d4b80a8e5b9d31927b
+      internalID: -1653628024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_3
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 943
+        width: 75
+        height: 113
+      alignment: 9
+      pivot: {x: 0.8266667, y: 0.7256637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 445e5440687f1e04eb5197f64e9a086c
+      internalID: -993668480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_4
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 943
+        width: 78
+        height: 113
+      alignment: 9
+      pivot: {x: 0.78205127, y: 0.7256637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99741bb6bd56ad246a3bd8e8eefee073
+      internalID: 726961870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_5
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 943
+        width: 76
+        height: 113
+      alignment: 9
+      pivot: {x: 0.75, y: 0.7345133}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27752e60ec1be824ea278d51ed223ee1
+      internalID: -950296052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_6
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 944
+        width: 76
+        height: 113
+      alignment: 9
+      pivot: {x: 0.80263156, y: 0.7256637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b70d316533cd4f94a80e64616ffdd0c0
+      internalID: -1885507480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_7
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 944
+        width: 75
+        height: 113
+      alignment: 9
+      pivot: {x: 0.88, y: 0.71681416}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69015c08766529047993168be2f2051c
+      internalID: 766111268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_8
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 943
+        width: 76
+        height: 113
+      alignment: 9
+      pivot: {x: 0.8947368, y: 0.7256637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63ce7fc70aea6484d985eb88125040dd
+      internalID: 2084181502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_10
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 943
+        width: 76
+        height: 113
+      alignment: 9
+      pivot: {x: 0.881579, y: 0.7256637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9430070ba00454448b3ebc5278c751c9
+      internalID: 1118076808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_12
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 943
+        width: 75
+        height: 113
+      alignment: 9
+      pivot: {x: 0.8266667, y: 0.7345133}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd440b5e812b4d74890af5bc37bd2ef8
+      internalID: 1498618751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_14
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 943
+        width: 75
+        height: 113
+      alignment: 9
+      pivot: {x: 0.8266667, y: 0.7345133}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c170cc006651764fbad4b9de80cfb0d
+      internalID: -401778405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_16
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 943
+        width: 75
+        height: 113
+      alignment: 9
+      pivot: {x: 0.8, y: 0.7256637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cefdb1b8f1ea9aa4e8da9b69c30158bf
+      internalID: -1855888567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_17
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 943
+        width: 75
+        height: 113
+      alignment: 9
+      pivot: {x: 0.7866667, y: 0.7256637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09a0395dd3d9bd04cb1832a72fb99718
+      internalID: 2024990531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_18
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 787
+        width: 140
+        height: 118
+      alignment: 9
+      pivot: {x: 0.8, y: 0.63559324}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38e8677cb51d471429b424020f80f30d
+      internalID: -1937752138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_19
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 786
+        width: 169
+        height: 112
+      alignment: 9
+      pivot: {x: 0.70085156, y: 0.5321846}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0612bec085a532c45b4140fe48a466f8
+      internalID: 875756813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_20
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 786
+        width: 194
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b86faebd3f5ff74f96e84fb76e983ca
+      internalID: 1580204697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_21
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 786
+        width: 186
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edeb73f1273994944b03c2e6e1c836c3
+      internalID: 1286955470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_23
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 786
+        width: 164
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 377379e47d3621649b964ba0625fc64a
+      internalID: 671337539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_25
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 786
+        width: 216
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85515c2e02754c144acd8de9f2da6b7d
+      internalID: -1671880189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_26
+      rect:
+        serializedVersion: 2
+        x: 1169
+        y: 787
+        width: 203
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00b03ed5d1413024b90de6c9976af40d
+      internalID: -1572827005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_28
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 643
+        width: 169
+        height: 118
+      alignment: 9
+      pivot: {x: 0.6923077, y: 0.65254235}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f044637c4a79b5b478fc0e8c403d12d8
+      internalID: -1698181240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_29
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 646
+        width: 197
+        height: 118
+      alignment: 9
+      pivot: {x: 0.62436545, y: 0.62711865}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd3998fcc419c6147a2dbca3f2c756dc
+      internalID: 913002891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_30
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 647
+        width: 192
+        height: 118
+      alignment: 9
+      pivot: {x: 0.609375, y: 0.61864406}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fda3c9f9ce8e91140b20e0d685701e3c
+      internalID: 1858806271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_33
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 646
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.6378378, y: 0.63793105}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 547052b95854e6a4e8e2a536aa4d61b4
+      internalID: -1433975208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_34
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 643
+        width: 242
+        height: 118
+      alignment: 9
+      pivot: {x: 0.5165289, y: 0.65254235}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f642d54073902247a38eb2c79804006
+      internalID: -1379351499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_35
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 646
+        width: 242
+        height: 118
+      alignment: 9
+      pivot: {x: 0.47520658, y: 0.62711865}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd355c0f57f1329458289ac804e88198
+      internalID: 695100352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_37
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 478
+        width: 125
+        height: 107
+      alignment: 9
+      pivot: {x: 0.72800004, y: 0.71028036}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83b9a865ff7ecec4ca139143a41131bd
+      internalID: 1508321569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_38
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 443
+        width: 145
+        height: 142
+      alignment: 9
+      pivot: {x: 0.6689655, y: 0.7816901}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dbffa939a2453046a19c69a540824c1
+      internalID: 1881604748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_39
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 444
+        width: 138
+        height: 141
+      alignment: 9
+      pivot: {x: 0.65217394, y: 0.78014183}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a55ca6edc4dd2f409e7ec373db6e188
+      internalID: -414633105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_40
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 450
+        width: 136
+        height: 135
+      alignment: 9
+      pivot: {x: 0.6691176, y: 0.77037036}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc00a059e4296fa4ab9955992bebf8f3
+      internalID: 1757711999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_41
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 387
+        width: 169
+        height: 198
+      alignment: 9
+      pivot: {x: 0.53846157, y: 0.84343433}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cec7c31c4bdba4468e934e8219d6322
+      internalID: -823019641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_42
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 467
+        width: 111
+        height: 94
+      alignment: 9
+      pivot: {x: 0.7297298, y: 0.8723404}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa76b68f3b499ce46afaeaa39290fb52
+      internalID: -2066155242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_43
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 467
+        width: 145
+        height: 112
+      alignment: 9
+      pivot: {x: 0.9034483, y: 0.79464287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9c2e30c081fea246b62c615dfb28368
+      internalID: 2094465471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_44
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 467
+        width: 171
+        height: 96
+      alignment: 9
+      pivot: {x: 0.9298246, y: 0.875}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27999ace094519a418dd26d370810a3f
+      internalID: 1257907824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_73
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 247
+        width: 174
+        height: 134
+      alignment: 9
+      pivot: {x: 0.9195402, y: 0.40298507}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70bb5c28c13f3c74791fc04d78eeef25
+      internalID: 211112731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_89
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 232
+        width: 181
+        height: 93
+      alignment: 9
+      pivot: {x: 0.8784531, y: 0.9032258}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bd5f2b7289ca644a93dd308aeea5ab5
+      internalID: 1818184127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_90
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 246
+        width: 181
+        height: 81
+      alignment: 9
+      pivot: {x: 0.8784531, y: 0.7777778}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75c6fba9e62702447ae3876162349792
+      internalID: -1458772088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_92
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 247
+        width: 138
+        height: 102
+      alignment: 9
+      pivot: {x: 0.8913044, y: 0.8529412}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c352276d79d54944a8ac0a1b3efa646
+      internalID: 1135502265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_93
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 247
+        width: 128
+        height: 106
+      alignment: 9
+      pivot: {x: 0.890625, y: 0.7735849}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e0de6c9ef058954ca01c0d83e69eb12
+      internalID: -169326442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_94
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 246
+        width: 109
+        height: 92
+      alignment: 9
+      pivot: {x: 0.7522935, y: 0.8586957}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1717d66979d4ec74d94a1de373205b2d
+      internalID: 1713058692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_95
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 245
+        width: 140
+        height: 89
+      alignment: 9
+      pivot: {x: 0.6857143, y: 0.8651686}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38398620dab6fbf49abc4129d4e89f4a
+      internalID: 1518217058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_96
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 245
+        width: 130
+        height: 92
+      alignment: 9
+      pivot: {x: 0.6923077, y: 0.86956525}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6cd3685f374ea6498b40e1920d00aee
+      internalID: 1641793428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_107
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 89
+        width: 121
+        height: 105
+      alignment: 9
+      pivot: {x: 0.77685946, y: 0.8}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3df5fa7c2d340c744bec8248c86adeab
+      internalID: -1934462051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_108
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 85
+        width: 105
+        height: 105
+      alignment: 9
+      pivot: {x: 0.8, y: 0.7809524}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3d0295917d0ae742b7c5aef6e2c6671
+      internalID: -261549559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_109
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 82
+        width: 116
+        height: 119
+      alignment: 9
+      pivot: {x: 0.8189655, y: 0.71428573}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ec8ffc247d71024487b8275661eabab
+      internalID: -1528246703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_115
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 91
+        width: 140
+        height: 93
+      alignment: 9
+      pivot: {x: 0.7714286, y: 0.87096775}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 277ad06b936ee70488fda9ed5f7fd269
+      internalID: -921350490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_116
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 89
+        width: 117
+        height: 96
+      alignment: 9
+      pivot: {x: 0.72649574, y: 0.8645834}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2205aaccfd7a1042947d9b50dbcf26e
+      internalID: 1252450071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_117
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 89
+        width: 106
+        height: 95
+      alignment: 9
+      pivot: {x: 0.7358491, y: 0.84210527}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f99e21b589c7464d8b0004e1fa5d786
+      internalID: -786064441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_118
+      rect:
+        serializedVersion: 2
+        x: 862
+        y: 80
+        width: 113
+        height: 98
+      alignment: 9
+      pivot: {x: 0.7699115, y: 0.83673465}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acea8f150ea26b747aa18cf28dd52833
+      internalID: 809688225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_147
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 80
+        width: 106
+        height: 69
+      alignment: 9
+      pivot: {x: 0.8113208, y: 1.3623189}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7040b51450649c4a9670ea10a2ff71c
+      internalID: -1925489327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_148
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 90
+        width: 96
+        height: 31
+      alignment: 9
+      pivot: {x: 0.84375, y: 2.516129}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b0f450459b4c134c9856df4918a54fe
+      internalID: 741614478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_150
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 12
+        width: 53
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b95ddbae722f3b847bcfd311b6fc67c6
+      internalID: -605055224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_151
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 12
+        width: 53
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e1f30216f6baf345a5486dd7d791952
+      internalID: -770882706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_152
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 12
+        width: 53
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ad8273bcaff68145bcde2dac32da74a
+      internalID: -385269975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_153
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 12
+        width: 53
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8ed38bba3eda6543bce6a04312f0941
+      internalID: -1397767795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_154
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 12
+        width: 53
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 398cf915b06ba6a4ab699e76fe969658
+      internalID: 35176977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_155
+      rect:
+        serializedVersion: 2
+        x: 827
+        y: 12
+        width: 53
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aa5b127d28e0de4c87f757c892d2f47
+      internalID: -718107214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_156
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 12
+        width: 106
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c955cf7305594149b982db2dce4b785
+      internalID: -285280886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dragon_157
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 12
+        width: 86
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8423262dc7d218c4a9a72cdc262349bd
+      internalID: -1323450972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      dragon_0: -1548402484
+      dragon_1: -788157840
+      dragon_10: 1118076808
+      dragon_100: -1105010250
+      dragon_101: 2046792488
+      dragon_102: -543151961
+      dragon_103: 309703361
+      dragon_104: 1412621513
+      dragon_105: 360206334
+      dragon_106: -1011033496
+      dragon_107: -1934462051
+      dragon_108: -261549559
+      dragon_109: -1528246703
+      dragon_11: -1508031172
+      dragon_110: -753805886
+      dragon_111: -1117710880
+      dragon_112: -1359072830
+      dragon_113: -1346774441
+      dragon_114: 1303692668
+      dragon_115: -921350490
+      dragon_116: 1252450071
+      dragon_117: -786064441
+      dragon_118: 809688225
+      dragon_119: -1790235010
+      dragon_12: 1498618751
+      dragon_120: -1567216786
+      dragon_121: -1469633125
+      dragon_122: -442772654
+      dragon_123: -1616622428
+      dragon_124: -214920127
+      dragon_125: 2054898086
+      dragon_126: 2012765033
+      dragon_127: 1884459513
+      dragon_128: 1040692913
+      dragon_129: -1888358369
+      dragon_13: 5217251
+      dragon_130: -1493658864
+      dragon_131: -1306783358
+      dragon_132: -1550563732
+      dragon_133: 952114440
+      dragon_134: 1554700417
+      dragon_135: 1470589298
+      dragon_136: 537280477
+      dragon_137: -309189846
+      dragon_138: 154552941
+      dragon_139: 130954515
+      dragon_14: -401778405
+      dragon_140: -1608255849
+      dragon_141: -824475265
+      dragon_142: 297674789
+      dragon_143: 912933173
+      dragon_144: 1078644745
+      dragon_145: -327029410
+      dragon_146: 1152112275
+      dragon_147: -1925489327
+      dragon_148: 741614478
+      dragon_149: 1565528347
+      dragon_15: 2069308618
+      dragon_150: -605055224
+      dragon_151: -770882706
+      dragon_152: -385269975
+      dragon_153: -1397767795
+      dragon_154: 35176977
+      dragon_155: -718107214
+      dragon_156: -285280886
+      dragon_157: -1323450972
+      dragon_16: -1855888567
+      dragon_17: 2024990531
+      dragon_18: -1937752138
+      dragon_19: 875756813
+      dragon_2: -1653628024
+      dragon_20: 1580204697
+      dragon_21: 1286955470
+      dragon_22: -799849481
+      dragon_23: 671337539
+      dragon_24: -688444812
+      dragon_25: -1671880189
+      dragon_26: -1572827005
+      dragon_27: 311413216
+      dragon_28: -1698181240
+      dragon_29: 913002891
+      dragon_3: -993668480
+      dragon_30: 1858806271
+      dragon_31: -894986146
+      dragon_32: -1790716022
+      dragon_33: -1433975208
+      dragon_34: -1379351499
+      dragon_35: 695100352
+      dragon_36: -404617524
+      dragon_37: 1508321569
+      dragon_38: 1881604748
+      dragon_39: -414633105
+      dragon_4: 726961870
+      dragon_40: 1757711999
+      dragon_41: -823019641
+      dragon_42: -2066155242
+      dragon_43: 2094465471
+      dragon_44: 1257907824
+      dragon_45: 588558054
+      dragon_46: -1534657284
+      dragon_47: -232927624
+      dragon_48: -1829481737
+      dragon_49: -681815799
+      dragon_5: -950296052
+      dragon_50: 1072878042
+      dragon_51: -382621294
+      dragon_52: -1807961672
+      dragon_53: -1768670329
+      dragon_54: -1230326584
+      dragon_55: -630042965
+      dragon_56: -882160419
+      dragon_57: -1912852933
+      dragon_58: 1147343545
+      dragon_59: -725000835
+      dragon_6: -1885507480
+      dragon_60: 1052672136
+      dragon_61: -1248539876
+      dragon_62: 211375486
+      dragon_63: -208044656
+      dragon_64: -1529813647
+      dragon_65: 1431495868
+      dragon_66: 1468425373
+      dragon_67: -1660791404
+      dragon_68: 596389564
+      dragon_69: -2144524141
+      dragon_7: 766111268
+      dragon_70: -1140547997
+      dragon_71: -1041056970
+      dragon_72: 228764971
+      dragon_73: 211112731
+      dragon_74: -72260776
+      dragon_75: -97208821
+      dragon_76: -750524944
+      dragon_77: -137853517
+      dragon_78: -1910889101
+      dragon_79: -832251151
+      dragon_8: 2084181502
+      dragon_80: -1294821272
+      dragon_81: -1380863925
+      dragon_82: -135712779
+      dragon_83: -2041743776
+      dragon_84: 1707663600
+      dragon_85: -760805087
+      dragon_86: 492646421
+      dragon_87: 1348512336
+      dragon_88: -1277861926
+      dragon_89: 1818184127
+      dragon_9: 887234519
+      dragon_90: -1458772088
+      dragon_91: -1966227026
+      dragon_92: 1135502265
+      dragon_93: -169326442
+      dragon_94: 1713058692
+      dragon_95: 1518217058
+      dragon_96: 1641793428
+      dragon_97: 1873628840
+      dragon_98: 845680537
+      dragon_99: 1128194908
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
