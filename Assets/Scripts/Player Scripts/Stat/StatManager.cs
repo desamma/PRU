@@ -1,8 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StatManager : MonoBehaviour
 {
     public static StatManager instance;
+
     [SerializeField]
     private StatsUI statsUI;
 
@@ -46,69 +47,65 @@ public class StatManager : MonoBehaviour
         }
     }
 
-    // Later
-    //private void Start()
-    //{
-    //    // Initialize stats
-    //    maxHealth = 100f;
-    //    currentHealth = maxHealth;
-    //    damage = 10;
-    //    weaponRange = 5f;
-    //    knockbackForce = 10f;
-    //    knockbackTime = 0.5f;
-    //    stunTime = 1f;
-    //    cooldown = 1f;
-    //    moveSpeed = 5f;
-    //    currentExp = 0;
-    //    expToNextLevel = 10;
-    //    level = 1;
-    //    upgradePoint = 0;
-    //}
-    
     public void UpgradeStat(string statName, int amount)
     {
         switch (statName)
         {
-            case "MaxHealth":
-                AddMaxHealth(amount);
-                break;
-            case "Attack":
-                AddAttack(amount);
-                break;
-            case "Speed":
-                AddSpeed(amount);
-                break;
-            default:
-                Debug.LogWarning("Unknown stat: " + statName);
-                break;
+            case "MaxHealth": AddMaxHealth(amount); break;
+            case "Attack": AddAttack(amount); break;
+            case "Speed": AddSpeed(amount); break;
+            default: Debug.LogWarning("Unknown stat: " + statName); break;
         }
     }
-    
+
     public void AddHealth(int amount)
     {
-        currentHealth += amount;
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-        statsUI.UpdateHealth();
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        statsUI?.UpdateHealth();
     }
 
     public void AddMaxHealth(int amount)
     {
         maxHealth += amount;
-        statsUI.UpdateHealth();
+        statsUI?.UpdateHealth();
     }
 
     public void AddAttack(int amount)
     {
         damage += amount;
-        statsUI.UpdateDamage();
+        statsUI?.UpdateDamage();
     }
 
     public void AddSpeed(int amount)
     {
         moveSpeed += amount;
-        statsUI.UpdateSpeed();
+        statsUI?.UpdateSpeed();
+    }
+
+    public void ApplyData(PlayerData data)
+    {
+        maxHealth = data.maxHealth;
+        currentHealth = data.currentHealth;
+
+        damage = data.damage;
+        weaponRange = data.weaponRange;
+        knockbackForce = data.knockbackForce;
+        knockbackTime = data.knockbackTime;
+        stunTime = data.stunTime;
+        cooldown = data.cooldown;
+
+        maxStamina = data.maxStamina;
+        currentStamina = data.currentStamina;
+        staminaRegenRate = data.staminaRegenRate;
+        staminaCost = data.staminaCost;
+        dashDelay = data.dashDelay;
+        dashDuration = data.dashDuration;
+        moveSpeed = data.moveSpeed;
+
+        currentExp = data.currentExp;
+        expToNextLevel = data.expToNextLevel;
+        level = data.level;
+        upgradePoint = data.upgradePoint;
+
     }
 }
