@@ -3,6 +3,7 @@
 public class StatManager : MonoBehaviour
 {
     public static StatManager instance;
+    public ExpManager expManager;
 
     [SerializeField]
     private StatsUI statsUI;
@@ -106,6 +107,7 @@ public class StatManager : MonoBehaviour
         expToNextLevel = data.expToNextLevel;
         level = data.level;
         upgradePoint = data.upgradePoint;
-
+        
+        expManager.UpdateUI();
     }
 }

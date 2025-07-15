@@ -8,6 +8,8 @@ public class ItemSO : ScriptableObject
   public Sprite itemIcon;
 
   public bool isGold; // differentiate gold from other items
+  public bool isArmor;
+  public bool isWeapon;
   public int stackSize = 10; // forgetting ahh moment
 
   [Header("Item Stats")] 

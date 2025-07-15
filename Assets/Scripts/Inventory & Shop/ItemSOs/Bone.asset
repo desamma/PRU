@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Bone
   m_EditorClassIdentifier: 
   itemName: Bone
-  itemDescription: UGA BOOGA
+  itemDescription: UGA BOOGA MAKE YOUR BONE STRONGER UGA
   itemIcon: {fileID: 21300000, guid: 1d5036865cf5e794a8c26289b6e4a62f, type: 3}
   isGold: 0
-  stackSize: 10
+  isArmor: 0
+  isWeapon: 1
+  stackSize: 1
   currentHealth: 0
   maxHealth: 0
   speed: 0
