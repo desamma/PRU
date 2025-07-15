@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum Boss1State
@@ -7,8 +8,9 @@ public enum Boss1State
     Knockback,
     Chase,
     Attack,
-    RangedAttack
-};
+    RangedAttack,
+    Dying
+}
 
 public class Enemy_Boss1_Movement : MonoBehaviour
 {
@@ -21,7 +23,6 @@ public class Enemy_Boss1_Movement : MonoBehaviour
     public Transform attackPoint;
     public LayerMask playerLayer;
 
-    //patrolling
     private Vector3[] patrolPoints;
     public float patrolDistance;
     int currentPatrolIndex = 0;
@@ -39,6 +40,7 @@ public class Enemy_Boss1_Movement : MonoBehaviour
     private Rigidbody2D rb;
     private Transform player;
     private Animator animator;
+    private Enemy_Health health;
 
     private void Awake()
     {
@@ -51,23 +53,36 @@ public class Enemy_Boss1_Movement : MonoBehaviour
         patrolPoints[3] = originalPosition + Vector3.right * patrolDistance;
     }
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //audioClip = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        health = GetComponent<Enemy_Health>();
         ChangeState(Boss1State.Idle);
+
         unstuckPatrolWaitTime *= patrolDistance / 2;
         unstuckPatrolWaitTimer = unstuckPatrolWaitTime;
-        //originalPosition = transform.position; // Store the original position for potential patrol logic
-        facingDirection = transform.localScale.x > 0 ? 1 : -1; // Determine initial facing direction based on local scale
+
+        facingDirection = transform.localScale.x > 0 ? 1 : -1;
     }
+
     private void Update()
     {
+        if (enemyState == Boss1State.Dying) return;
+
+        // If health is zero, start dying
+        if (health != null && health.IsDead)
+        {
+            rb.velocity = Vector2.zero;
+            ChangeState(Boss1State.Dying);
+            return;
+        }
+
         if (enemyState != Boss1State.Knockback)
         {
             if (attackCooldownTimer > 0)
                 attackCooldownTimer -= Time.deltaTime;
+
             CheckForPlayer();
 
             switch (enemyState)
@@ -76,29 +91,8 @@ public class Enemy_Boss1_Movement : MonoBehaviour
                     Chase();
                     break;
                 case Boss1State.Attack:
-                    rb.velocity = Vector2.zero;
-                    break;
                 case Boss1State.RangedAttack:
-                    {
-                        if (attackCooldownTimer > 0)
-                        {
-                            rb.velocity = Vector2.zero; // Stop movement
-                        }
-                        else
-                        {
-                            rb.velocity = Vector2.zero; // Stop the enemy when attacking
-                            
-                            // Face the player when attacking
-                            if (player != null)
-                            {
-                                if ((player.position.x > transform.position.x && facingDirection == -1) ||
-                                    (player.position.x < transform.position.x && facingDirection == 1))
-                                {
-                                    Flip();
-                                }
-                            }
-                        }
-                    }
+                    rb.velocity = Vector2.zero;
                     break;
                 case Boss1State.Patrol:
                     Patrol();
@@ -110,22 +104,20 @@ public class Enemy_Boss1_Movement : MonoBehaviour
         }
     }
 
-    void Chase()
+    private void Chase()
     {
-        if (player.position.x > transform.position.x && facingDirection == -1 ||
-                player.position.x < transform.position.x && facingDirection == 1)
+        if ((player.position.x > transform.position.x && facingDirection == -1) ||
+            (player.position.x < transform.position.x && facingDirection == 1))
         {
             Flip();
         }
-        // Allow to use speed to control the enemy's movement speed
+
         Vector2 direction = (player.position - transform.position).normalized;
         rb.velocity = direction * speed;
-        //rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);
     }
 
-    void Patrol()
+    private void Patrol()
     {
-        //if waiting, idle
         if (isWaiting)
         {
             ChangeState(Boss1State.Idle);
@@ -136,7 +128,6 @@ public class Enemy_Boss1_Movement : MonoBehaviour
                 isWaiting = false;
                 waitTimer = 0f;
 
-                // Pick a new random patrol index (different from current)
                 int newIndex;
                 do
                 {
@@ -144,10 +135,11 @@ public class Enemy_Boss1_Movement : MonoBehaviour
                 } while (newIndex == currentPatrolIndex);
 
                 currentPatrolIndex = newIndex;
-                ChangeState(Boss1State.Patrol); // Resume patrolling
+                ChangeState(Boss1State.Patrol);
             }
             return;
         }
+
         if (unstuckPatrolWaitTimer > 0)
         {
             unstuckPatrolWaitTimer -= Time.deltaTime;
@@ -162,7 +154,6 @@ public class Enemy_Boss1_Movement : MonoBehaviour
                 Flip();
             }
 
-            //imprecision in floating-point distance and movement
             if (Vector2.Distance(transform.position, targetPos) < 0.2f)
             {
                 rb.velocity = Vector2.zero;
@@ -172,18 +163,19 @@ public class Enemy_Boss1_Movement : MonoBehaviour
         else
         {
             rb.velocity = Vector2.zero;
-            unstuckPatrolWaitTimer = unstuckPatrolWaitTime; // Reset the timer
+            unstuckPatrolWaitTimer = unstuckPatrolWaitTime;
             isWaiting = true;
         }
     }
 
     private void Flip()
     {
-        facingDirection *= -1; // Change the direction
+        facingDirection *= -1;
         Vector3 localScale = transform.localScale;
-        localScale.x *= -1; // Flip the sprite by changing the x scale
+        localScale.x *= -1;
         transform.localScale = localScale;
     }
+
     private void CheckForPlayer()
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(detectionPoint.position, playerDetectionRange, playerLayer);
@@ -196,7 +188,6 @@ public class Enemy_Boss1_Movement : MonoBehaviour
 
             if (distanceToPlayer <= attackRangeMelee)
             {
-                // Player is within melee range — prioritize this
                 if (attackCooldownTimer <= 0)
                 {
                     ChangeState(Boss1State.Attack);
@@ -205,7 +196,6 @@ public class Enemy_Boss1_Movement : MonoBehaviour
             }
             else if (distanceToPlayer <= attackRangeRanged)
             {
-                // Player is not in melee range, but is in ranged range
                 if (attackCooldownTimer <= 0)
                 {
                     ChangeState(Boss1State.RangedAttack);
@@ -214,13 +204,11 @@ public class Enemy_Boss1_Movement : MonoBehaviour
             }
             else
             {
-                // Player is far away, start chasing
                 ChangeState(Boss1State.Chase);
             }
         }
         else
         {
-            // No player detected, resume patrolling
             rb.velocity = Vector2.zero;
             ChangeState(Boss1State.Patrol);
         }
@@ -228,33 +216,15 @@ public class Enemy_Boss1_Movement : MonoBehaviour
 
     public void ChangeState(Boss1State newState)
     {
-        // Disable animator parameters for the current state
-        switch (enemyState)
-        {
-            case Boss1State.Idle:
-                animator.SetBool("isIdle", false);
-                break;
-            case Boss1State.Patrol:
-                animator.SetBool("isPatrolling", false);
-                break;
-            case Boss1State.Knockback:
-                animator.SetBool("isKnockback", false);
-                break;
-            case Boss1State.Chase:
-                animator.SetBool("isChasing", false);
-                break;
-            case Boss1State.Attack:
-                animator.SetBool("isAttacking", false);
-                break;
-            case Boss1State.RangedAttack:
-                animator.SetBool("isRangedAttacking", false);
-                break;
-        }
+        animator.SetBool("isIdle", false);
+        animator.SetBool("isPatrolling", false);
+        animator.SetBool("isChasing", false);
+        animator.SetBool("isAttacking", false);
+        animator.SetBool("isRangedAttacking", false);
+        animator.SetBool("isDying", false);
 
-        // Update the state
         enemyState = newState;
 
-        // Enable animator parameters for the new state
         switch (enemyState)
         {
             case Boss1State.Idle:
@@ -262,9 +232,6 @@ public class Enemy_Boss1_Movement : MonoBehaviour
                 break;
             case Boss1State.Patrol:
                 animator.SetBool("isPatrolling", true);
-                break;
-            case Boss1State.Knockback:
-                animator.SetBool("isKnockback", true);
                 break;
             case Boss1State.Chase:
                 animator.SetBool("isChasing", true);
@@ -275,8 +242,19 @@ public class Enemy_Boss1_Movement : MonoBehaviour
             case Boss1State.RangedAttack:
                 animator.SetBool("isRangedAttacking", true);
                 break;
+            case Boss1State.Dying:
+                animator.SetBool("isDying", true);
+                StartCoroutine(DestroyAfterAnimation());
+                break;
         }
     }
+
+    private IEnumerator DestroyAfterAnimation()
+    {
+        yield return new WaitForSeconds(1.4f); // Adjust this to your actual death animation length
+        Destroy(gameObject);
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (detectionPoint != null)
@@ -284,6 +262,7 @@ public class Enemy_Boss1_Movement : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(detectionPoint.position, playerDetectionRange);
         }
+
         if (attackPoint != null)
         {
             Gizmos.color = Color.green;
