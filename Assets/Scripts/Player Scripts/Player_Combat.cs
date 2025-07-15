@@ -39,15 +39,20 @@ public class Player_Combat : MonoBehaviour
                 hitObject.GetComponent<Enemy_Health>().ChangeHealth(-StatManager.instance.damage);
                 hitObject.GetComponent<Enemy_Knockback>().KnockBack(transform, StatManager.instance.knockbackForce, StatManager.instance.knockbackTime, StatManager.instance.stunTime);
             }
-            if (hitObject.CompareTag("Boss1"))
+            else if (hitObject.CompareTag("Boss1"))
             {
                 hitObject.GetComponent<Enemy_Health>().ChangeHealthNoDestroy(-StatManager.instance.damage);
                 hitObject.GetComponent<Enemy_Boss1_Knockback>().KnockBack(transform, StatManager.instance.knockbackForce, StatManager.instance.knockbackTime, StatManager.instance.stunTime);
             }
-            if (hitObject.CompareTag("Dragon"))
+            else if (hitObject.CompareTag("Dragon"))
             {
                 hitObject.GetComponent<Enemy_Dragon_Health>().ChangeHealth(-StatManager.instance.damage);
                 //no knockback for the dragon
+            }
+            else if (hitObject.CompareTag("Necromage"))
+            {
+                hitObject.GetComponent<Enemy_Necromage_Movement>().TakeDamage();
+                hitObject.GetComponent<Enemy_Health>().ChangeHealthNoDestroy(-StatManager.instance.damage);
             }
             // Check if the object is a barrel
             else if (hitObject.CompareTag("Barrel"))
