@@ -3,6 +3,7 @@
 public class StatManager : MonoBehaviour
 {
     public static StatManager instance;
+    public ExpManager expManager;
 
     [SerializeField]
     private StatsUI statsUI;
@@ -58,6 +59,11 @@ public class StatManager : MonoBehaviour
         }
     }
 
+    public void UpdateUI()
+    {
+        statsUI?.UpdateAllStats();
+    }
+
     public void AddHealth(int amount)
     {
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
@@ -106,6 +112,7 @@ public class StatManager : MonoBehaviour
         expToNextLevel = data.expToNextLevel;
         level = data.level;
         upgradePoint = data.upgradePoint;
-
+        
+        expManager.UpdateUI();
     }
 }

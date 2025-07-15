@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283519de181134f4f8bed981c53304a1, type: 3}
   m_Name: Armor
   m_EditorClassIdentifier: 
-  itemName: Test Armor
-  itemDescription: an armor, but red!
+  itemName: Armor
+  itemDescription: an armor, but red! *also make you bigger*
   itemIcon: {fileID: 1787917511, guid: 3c009be1f5b463c4697946a6537c18ac, type: 3}
   isGold: 0
+  isArmor: 1
+  isWeapon: 0
   stackSize: 1
   currentHealth: 0
-  maxHealth: 5
-  speed: 0
-  damage: 0
+  maxHealth: 7
+  speed: -3
+  damage: -1
   duration: 0

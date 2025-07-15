@@ -6,6 +6,8 @@ public class Loot : MonoBehaviour
     public ItemSO itemSO;
     public SpriteRenderer sr;
     public Animator animator;
+    
+    public static event Action<ItemSO, int> OnItemLooted;
 
     public bool canBePickedUp = true; //prevent dropping and picking up at the same time
     private bool hasBeenPickedUp; //prevent duplication when drop
@@ -47,6 +49,4 @@ public class Loot : MonoBehaviour
         sr.sprite = itemSO.itemIcon;
         name = itemSO.name;
     }
-
-    public static event Action<ItemSO, int> OnItemLooted;
 }

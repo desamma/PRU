@@ -6,6 +6,12 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private ShopSlot[] shopSlots;
     
     [SerializeField] private InventoryManager inventoryManager;
+    
+    [SerializeField] private UseItem useItem;
+    
+    [SerializeField] private GameObject player;
+
+    public Sprite redArmor;
 
     public void PopulateShopItems(List<ShopItems> shopItems)
     {
@@ -23,15 +29,33 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void TryBuyItem(ItemSO itemSO, int price)
+    public void TryBuyItem(ShopSlot shopSlot)
     {
-        if (itemSO != null && inventoryManager.gold >= price)
+        if (shopSlot.itemSO != null && inventoryManager.gold >= shopSlot.price)
         {
-            if (HasSpaceForItem(itemSO))
+            if (HasSpaceForItem(shopSlot.itemSO))
             {
-                inventoryManager.gold -= price;
+                inventoryManager.gold -= shopSlot.price;
                 inventoryManager.goldText.text = inventoryManager.gold.ToString();
-                inventoryManager.AddItem(itemSO, 1);
+                if (shopSlot.itemSO.isArmor)
+                {
+                    useItem.ApplyItemEffect(shopSlot.itemSO);
+                    SpriteRenderer playerRenderer = player.GetComponent<SpriteRenderer>();
+                    playerRenderer.sprite = redArmor;
+                    Animator playerAnimator = player.GetComponent<Animator>();
+                    playerAnimator.SetBool("isRed", true);
+                    player.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                    shopSlot.gameObject.SetActive(false);
+                }
+                else if (shopSlot.itemSO.isWeapon)
+                {
+                    useItem.ApplyItemEffect(shopSlot.itemSO);
+                    shopSlot.gameObject.SetActive(false);
+                }
+                else
+                {
+                    inventoryManager.AddItem(shopSlot.itemSO, 1);
+                }
             }
         }
     }

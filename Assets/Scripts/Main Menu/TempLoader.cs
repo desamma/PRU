@@ -4,6 +4,7 @@ using UnityEngine;
 public class TempLoader : MonoBehaviour
 {
     private PlayerData data;
+    private InventoryManager inventoryManager;
 
     public static void CreateLoader(PlayerData data)
     {
@@ -21,12 +22,27 @@ public class TempLoader : MonoBehaviour
     {
         yield return new WaitUntil(() => StatManager.instance != null);
         StatManager.instance.ApplyData(data);
+        
+        GameObject inventoryCanvas = GameObject.Find("InventoryCanvas");
+        if (inventoryCanvas != null)
+        {
+            inventoryManager = inventoryCanvas.GetComponent<InventoryManager>();
+            if (inventoryManager != null)
+            {
+                inventoryManager.LoadFromSave(data.savedSlotsData, data.savedGold);
+            }
+        }
 
         Vector2 checkpoint = data.GetCheckpoint();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         if (player != null)
         {
+            player.GetComponent<Animator>().SetBool("isRed", data.savedIsRed);
+            if (data.savedIsRed)
+            {
+                player.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            }
             player.transform.position = checkpoint;
             Debug.Log("Dịch chuyển người chơi đến checkpoint: " + checkpoint);
         }

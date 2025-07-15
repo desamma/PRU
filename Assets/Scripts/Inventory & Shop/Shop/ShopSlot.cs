@@ -9,7 +9,7 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public TMP_Text itemNameText;
     public TMP_Text priceText;
     public Image itemImage;
-    public Button statButton;
+    public Button shopButton;
     
     [SerializeField] private ShopManager shopManager;
     [SerializeField] private ShopInfo shopInfo;
@@ -23,13 +23,13 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         itemNameText.text = itemSO.itemName;
         price =  newPrice;
         priceText.text = price.ToString();
-        statButton.interactable = true;
-        statButton.navigation = new Navigation { mode = Navigation.Mode.None };
+        shopButton.interactable = true;
+        shopButton.navigation = new Navigation { mode = Navigation.Mode.None };
     }
 
     public void OnBuyButtonClicked()
     {
-        shopManager.TryBuyItem(itemSO, price);
+        shopManager.TryBuyItem(this);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

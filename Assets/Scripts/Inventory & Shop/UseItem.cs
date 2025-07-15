@@ -6,19 +6,19 @@ public class UseItem : MonoBehaviour
 {
     public void ApplyItemEffect(ItemSO itemSO)
     {
-        if (itemSO.currentHealth > 0)
+        if (itemSO.currentHealth != 0)
         {
             StatManager.instance.AddHealth(itemSO.currentHealth);
         }
-        if (itemSO.maxHealth > 0)
+        if (itemSO.maxHealth != 0)
         {
             StatManager.instance.AddMaxHealth(itemSO.maxHealth);
         }
-        if (itemSO.speed > 0)
+        if (itemSO.speed != 0)
         {
             StatManager.instance.AddSpeed(itemSO.speed);
         }
-        if (itemSO.damage > 0)
+        if (itemSO.damage != 0)
         {
             StatManager.instance.AddAttack(itemSO.damage);
         }

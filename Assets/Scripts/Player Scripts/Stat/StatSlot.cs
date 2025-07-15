@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class StatSlot : MonoBehaviour
 {
-    [SerializeField]
-    private StatSO statSO;
     //[SerializeField]
     //private GameObject statSlot;
     public string statName;
@@ -20,12 +18,9 @@ public class StatSlot : MonoBehaviour
     
     public void OnValidate()
     {
-        if (statSO != null)
-        {
-            //statIcon.sprite = statSO.statIcon;
-            statButton.interactable = true;
-            statButton.navigation = new Navigation { mode = Navigation.Mode.None };
-        }
+        //statIcon.sprite = statSO.statIcon;
+        statButton.interactable = true;
+        statButton.navigation = new Navigation { mode = Navigation.Mode.None };
     }
 
     public void TryUpgradeStat()

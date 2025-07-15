@@ -101,4 +101,17 @@ public class InventoryManager : MonoBehaviour
             slot.UpdateUI();
         }
     }
+
+    public void LoadFromSave(InventoryData[] savedSlotsData, int savedGold)
+    {
+        for (var i = 0; i < savedSlotsData.Length; i++)
+        {
+            var savedItem = ItemDataBase.instance.GetItem(savedSlotsData[i].savedItemName);
+            inventorySlots[i].itemSO = savedItem;
+            inventorySlots[i].quantity = savedSlotsData[i].savedItemQuantity;
+            inventorySlots[i].UpdateUI();
+        }
+        gold = savedGold;
+        goldText.text = gold.ToString();
+    }
 }
