@@ -11,6 +11,7 @@ TagManager:
   - Boss1
   - Dragon
   - Bonfire
+  - Necromage
   layers:
   - Default
   - TransparentFX
