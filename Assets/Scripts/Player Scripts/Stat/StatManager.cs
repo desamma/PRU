@@ -59,6 +59,11 @@ public class StatManager : MonoBehaviour
         }
     }
 
+    public void UpdateUI()
+    {
+        statsUI?.UpdateAllStats();
+    }
+
     public void AddHealth(int amount)
     {
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);

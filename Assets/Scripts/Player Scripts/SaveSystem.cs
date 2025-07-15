@@ -6,12 +6,12 @@ public static class SaveSystem
 {
     private static string path = Application.persistentDataPath + "/save.dat";
 
-    public static void SavePlayer(StatManager stats, Vector2 checkpointPos, InventorySlot[] slots, int gold)
+    public static void SavePlayer(StatManager stats, Vector2 checkpointPos, InventorySlot[] slots, int gold, bool  isRed)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(stats, checkpointPos, slots, gold);
+        PlayerData data = new PlayerData(stats, checkpointPos, slots, gold, isRed);
         formatter.Serialize(stream, data);
         stream.Close();
     }

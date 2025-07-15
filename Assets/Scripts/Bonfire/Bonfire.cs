@@ -3,6 +3,7 @@
 public class Bonfire : MonoBehaviour
 {
     private InventoryManager inventory;
+    [SerializeField] private Animator playerAnimator;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -18,6 +19,7 @@ public class Bonfire : MonoBehaviour
         var stats = StatManager.instance;
         stats.currentHealth = stats.maxHealth;
         stats.currentStamina = stats.maxStamina;
+        stats.UpdateUI();
         Debug.Log("Đã hồi máu và stamina.");
     }
 
@@ -31,7 +33,8 @@ public class Bonfire : MonoBehaviour
             {
                 var slots = inventory.inventorySlots;
                 Vector2 checkpointPos = transform.position;
-                SaveSystem.SavePlayer(StatManager.instance, checkpointPos, slots, inventory.gold);
+                var isRed = playerAnimator.GetBool("isRed");
+                SaveSystem.SavePlayer(StatManager.instance, checkpointPos, slots, inventory.gold, isRed);
                 Debug.Log("Checkpoint đã được lưu tại: " + checkpointPos);
             }
             else

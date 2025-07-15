@@ -38,6 +38,11 @@ public class TempLoader : MonoBehaviour
 
         if (player != null)
         {
+            player.GetComponent<Animator>().SetBool("isRed", data.savedIsRed);
+            if (data.savedIsRed)
+            {
+                player.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            }
             player.transform.position = checkpoint;
             Debug.Log("Dịch chuyển người chơi đến checkpoint: " + checkpoint);
         }

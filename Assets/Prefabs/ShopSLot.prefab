@@ -227,7 +227,7 @@ MonoBehaviour:
   itemNameText: {fileID: 2055215558524222606}
   priceText: {fileID: 4853403142261100067}
   itemImage: {fileID: 2290147747712636254}
-  statButton: {fileID: 8841658785830151661}
+  shopButton: {fileID: 8841658785830151661}
   shopManager: {fileID: 0}
   shopInfo: {fileID: 0}
   price: 0
