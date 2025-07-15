@@ -8,6 +8,8 @@ TagManager:
   - Terrain
   - Barrel
   - Bullet
+  - Boss1
+  - Dragon
   layers:
   - Default
   - TransparentFX

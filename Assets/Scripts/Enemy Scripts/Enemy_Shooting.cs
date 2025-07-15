@@ -6,6 +6,9 @@ public class Enemy_Shooting : MonoBehaviour
     public Transform attackPoint;
     public float attackRange;
     public LayerMask playerLayer;
+
+    public float knockbackForce;
+    public float stunTime;
     public GameObject projectilePrefab;
     public float projectileSpeed = 5f;
     public float projectileLifeTime = 5f;

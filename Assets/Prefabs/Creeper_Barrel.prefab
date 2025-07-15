@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 8749450677816695205}
   - component: {fileID: 3309993121720559863}
   - component: {fileID: 2201371060588947605}
-  - component: {fileID: 2569916952664612104}
   - component: {fileID: 4691197433202613635}
   - component: {fileID: 1437273405204679591}
   m_Layer: 0
@@ -206,21 +205,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.07440403}
   m_Size: {x: 0.8645668, y: 0.95987743}
   m_Direction: 0
---- !u!114 &2569916952664612104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136404537402989578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30dd64ad5b5ddf547aecd5ad536e790b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  expReward: 3
-  currentHealth: 0
-  maxHealth: 2
 --- !u!114 &4691197433202613635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +221,8 @@ MonoBehaviour:
   damage: 1
   knockbackForce: 10
   stunTime: 0.5
-  explosionRadius: 2
+  explosionRadius: 2.5
+  animationDelay: 0.3
 --- !u!114 &1437273405204679591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,17 +235,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53149a4351d2fbf4aa88c77a8f6baf65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  playerDetectionRange: 5
+  speed: 10
+  playerDetectionRange: 7
   detectionPoint: {fileID: 6619026414368842715}
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   explodePoint: {fileID: 6928516136023380051}
-  explodeRange: 2
+  explodeRange: 2.5
+  player: {fileID: 0}
   barrel: {fileID: 4691197433202613635}
-  animationDelay: 0.5
-  explosionDelay: 0.5
+  animationDelay: 0.3
+  explosionDelay: 3
 --- !u!1 &4692111715887801628
 GameObject:
   m_ObjectHideFlags: 0
