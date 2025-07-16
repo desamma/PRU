@@ -1,10 +1,15 @@
-using System;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Enemy_Dragon_Health : MonoBehaviour
 {
     public int expReward = 3;
-    public float deathAnimationDuration = 2f; // Duration to wait before destroying
+    public float deathAnimationDuration = 2f; // Thời gian chờ trước khi hiện ảnh win
+    public Image youWinImage; // Gán trong Inspector
+    public int sceneToLoad = 0; // Scene chiến thắng (main menu, victory...)
 
     public delegate void MonsterDefeted(int exp);
     public static event MonsterDefeted OnMonsterDefeated;
@@ -20,11 +25,18 @@ public class Enemy_Dragon_Health : MonoBehaviour
     {
         currentHealth = maxHealth;
         dragonMovement = GetComponent<Enemy_Dragon_Movement>();
+
+        if (youWinImage != null)
+        {
+            youWinImage.gameObject.SetActive(false);
+            var tempColor = youWinImage.color;
+            tempColor.a = 0;
+            youWinImage.color = tempColor;
+        }
     }
 
     public void ChangeHealth(int amount)
     {
-        // Don't process health changes if already dying
         if (isDying) return;
 
         currentHealth += amount;
@@ -36,34 +48,31 @@ public class Enemy_Dragon_Health : MonoBehaviour
         else if (currentHealth <= 0)
         {
             currentHealth = 0;
-            StartDeathSequence();
+            StartCoroutine(ShowVictoryImage());
+            StartDeathSequence(); 
         }
     }
 
     private void StartDeathSequence()
     {
+
         isDying = true;
 
-        // Change dragon to Die state to play death animation
         if (dragonMovement != null)
         {
             dragonMovement.ChangeState(EnemyDragonState.Die);
         }
-
-        // Disable all colliders so dragon can't interact with anything
+        
         DisableAllColliders();
 
-        // Award experience immediately
         OnMonsterDefeated?.Invoke(expReward);
         OnEnemyDestroyed?.Invoke();
+        
 
-        // Destroy after animation completes
-        Invoke(nameof(DestroyDragon), deathAnimationDuration);
     }
 
     private void DisableAllColliders()
     {
-        // Get all colliders on this GameObject and disable them
         Collider2D[] colliders = GetComponents<Collider2D>();
         foreach (Collider2D collider in colliders)
         {
@@ -77,8 +86,30 @@ public class Enemy_Dragon_Health : MonoBehaviour
         }
     }
 
-    private void DestroyDragon()
+    private IEnumerator ShowVictoryImage()
     {
-        Destroy(gameObject);
+        yield return new WaitForSeconds(deathAnimationDuration);
+
+        if (youWinImage != null)
+        {
+            youWinImage.gameObject.SetActive(true);
+
+            float duration = 1f;
+            float t = 0f;
+            Color c = youWinImage.color;
+
+            while (t < duration)
+            {
+                t += Time.deltaTime;
+                c.a = Mathf.Clamp01(t / duration);
+                youWinImage.color = c;
+                yield return null;
+            }
+
+            //hien you win!
+            yield return new WaitForSeconds(10f);
+        }
+
+        SceneManager.LoadScene(sceneToLoad);
     }
 }

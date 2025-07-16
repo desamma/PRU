@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PlayerData
@@ -13,6 +14,7 @@ public class PlayerData
     public InventoryData[]  savedSlotsData;
     public int savedGold;
     public bool savedIsRed;
+    public int currentScene;
 
     public PlayerData(StatManager stats, Vector2 checkpointPos, InventorySlot[] slots, int gold, bool isRed)
     {
@@ -49,6 +51,7 @@ public class PlayerData
         savedGold = gold;
         
         savedIsRed = isRed;
+        currentScene = SceneManager.GetActiveScene().buildIndex;
     }
 
     public Vector2 GetCheckpoint() => new Vector2(checkpointX, checkpointY);

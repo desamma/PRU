@@ -269,8 +269,7 @@ public class Enemy_TNT_Movement : MonoBehaviour
             }
         }
     }
-
-
+    
     private void OnDrawGizmosSelected()
     {
         if (detectionPoint != null)
