@@ -462,7 +462,7 @@ public class Enemy_Dragon_Movement : MonoBehaviour
 
             if (distanceToTarget >= 0.5f)
             {
-                rb.velocity = flyAwayDirection * flySpeed * speed;
+                rb.velocity =  flySpeed * speed * flyAwayDirection;
             }
             else
             {

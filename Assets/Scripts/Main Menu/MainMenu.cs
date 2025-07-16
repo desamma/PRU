@@ -15,7 +15,8 @@ public class MainMenu : MonoBehaviour
         if (SaveSystem.SaveExists())
         {
             PlayerData data = SaveSystem.LoadPlayer();
-            SceneManager.LoadSceneAsync(1).completed += (op) =>
+            var scene = data.currentScene;
+            SceneManager.LoadSceneAsync(scene).completed += (op) =>
             {
                 TempLoader.CreateLoader(data);
             };
