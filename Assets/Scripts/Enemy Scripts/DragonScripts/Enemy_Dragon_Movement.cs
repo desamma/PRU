@@ -52,10 +52,9 @@ public class Enemy_Dragon_Movement : MonoBehaviour
     public float airCombatDuration = 5f;
     public float flyAttackCooldown = 1.5f;
 
-    // MODIFIED: Separate colliders for different attack types
     [Header("Attack Colliders")]
     public EdgeCollider2D LandFireCollider;  // For ground fire attacks
-    public EdgeCollider2D AirFireCollider;   // For air fire attacks (like fireballs)
+    public EdgeCollider2D AirFireCollider;   // For air fire attacks
 
     [Header("Colliders")]
     public BoxCollider2D idleCollider;
@@ -71,18 +70,17 @@ public class Enemy_Dragon_Movement : MonoBehaviour
     private Vector3 flyAwayTarget;
     private float attackCooldownTimer;
     private float landAttackTimer;
-    private float flyAttackTimer_Duration; // NEW: Separate timer for fly attack duration
+    private float flyAttackTimer_Duration; 
     private float damageTimer;
     private float flyAwayTimer;
-    private float landingAnimationTimer; // NEW: Timer for landing animation
+    private float landingAnimationTimer;
     private int facingDirection;
     private bool isRepositioning = false;
 
-    // MODIFIED: Separate fire states for each attack type
     private bool landFireActive = false;
     private bool airFireActive = false;
     private bool isFlyingAway = false;
-    private bool isLandingAnimationPlaying = false; // NEW: Track if landing animation is playing
+    private bool isLandingAnimationPlaying = false;
 
     private float stateTransitionTimer;
     private EnemyDragonState pendingState;
@@ -101,7 +99,6 @@ public class Enemy_Dragon_Movement : MonoBehaviour
         ChangeState(EnemyDragonState.Idle);
         facingDirection = transform.localScale.x > 0 ? 1 : -1;
 
-        // MODIFIED: Ensure both fire colliders start disabled
         if (LandFireCollider != null)
             LandFireCollider.enabled = false;
         if (AirFireCollider != null)
@@ -113,7 +110,7 @@ public class Enemy_Dragon_Movement : MonoBehaviour
         if (enemyState == EnemyDragonState.Die)
         {
             rb.velocity = Vector2.zero;
-            DeactivateAllFireColliders(); // MODIFIED: Deactivate all fire colliders
+            DeactivateAllFireColliders(); 
             return;
         }
 
@@ -166,7 +163,6 @@ public class Enemy_Dragon_Movement : MonoBehaviour
         }
     }
 
-    // MODIFIED: Updated timer system for both attack types
     private void UpdateTimers()
     {
         if (attackCooldownTimer > 0)
@@ -262,7 +258,6 @@ public class Enemy_Dragon_Movement : MonoBehaviour
         }
     }
 
-    // MODIFIED: Land attack now uses only land fire collider
     private void LandAttack()
     {
         rb.velocity = Vector2.zero;
@@ -293,7 +288,6 @@ public class Enemy_Dragon_Movement : MonoBehaviour
         }
     }
 
-    // MODIFIED: Fly attack now uses air fire collider (only when flying)
     private void FlyAttack()
     {
         rb.velocity = Vector2.zero;
@@ -357,7 +351,6 @@ public class Enemy_Dragon_Movement : MonoBehaviour
         DeactivateAirFireCollider();
     }
 
-    // MODIFIED: Handle damage for both attack types (air collider only works when flying)
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Player") && damageTimer <= 0)
@@ -380,7 +373,6 @@ public class Enemy_Dragon_Movement : MonoBehaviour
         }
     }
 
-    // Rest of the methods remain the same...
     private void ScheduleStateChange(EnemyDragonState newState, float delay)
     {
         if (isWaitingForStateChange && pendingState == newState)
@@ -599,7 +591,7 @@ public class Enemy_Dragon_Movement : MonoBehaviour
             airFireActive = false;
         }
 
-        // Extra safety: Deactivate air fire collider when not flying
+        //Deactivate air fire collider when not flying
         if (newState != EnemyDragonState.Fly && newState != EnemyDragonState.FlyAttack && newState != EnemyDragonState.Repositioning)
         {
             DeactivateAirFireCollider();
